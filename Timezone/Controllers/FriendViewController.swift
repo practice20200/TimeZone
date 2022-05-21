@@ -1,5 +1,5 @@
 //
-//  CountriesViewController.swift
+//  FriendViewController.swift
 //  Timezone
 //
 //  Created by Apple New on 2022-05-20.
@@ -8,13 +8,11 @@
 import UIKit
 import Elements
 
-class CountriesViewController: UIViewController {
+class FriendViewController: UIViewController {
 
-    var data = [ViewModel]()
-    
     private var country : BaseUILabel = {
         let label = BaseUILabel()
-        label.text = "Country"
+        label.text = "Friends"
         label.layer.shadowOpacity = 0.2
         label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         label.textAlignment = .center
@@ -25,7 +23,7 @@ class CountriesViewController: UIViewController {
     private let tableView : UITableView = {
         let table = UITableView()
         table.backgroundColor = .secondarySystemBackground
-        table.register(ViewTableCell.self, forCellReuseIdentifier: "cell")
+        table.register(FriendsListCell.self, forCellReuseIdentifier: "cell")
         return table
     }()
 
@@ -58,8 +56,14 @@ class CountriesViewController: UIViewController {
 
         ])
         
-        let friendBTN = UIBarButtonItem(title: "Friend", style: .plain, target: self, action: #selector(friendHandler))
-        navigationItem.rightBarButtonItem = friendBTN
+        let addButton = UIBarButtonItem(image: UIImage(systemName: "person.3.fill"), style: .plain, target: self, action: #selector(addHandler))
+        navigationItem.rightBarButtonItem = addButton
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+      
     }
 
     
@@ -67,34 +71,37 @@ class CountriesViewController: UIViewController {
         super.viewWillLayoutSubviews()
         tableView.frame = view.bounds
     }
-     
-    @objc func friendHandler(){
-        let vc = FriendViewController()
+
+    
+    @objc func addHandler(){
+        let vc = FriendsAddViewController()
         let navVC = UINavigationController(rootViewController: vc)
         present(navVC, animated: true)
     }
-
+    
 }
 
 
-extension CountriesViewController : UITableViewDelegate{
+extension FriendViewController : UITableViewDelegate {
 
+    
 }
 
-
-extension CountriesViewController : UITableViewDataSource {
+extension FriendViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return data.count
         return 20
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath : IndexPath) -> UITableViewCell {
-       let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ViewTableCell
-       return cell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FriendsListCell
+        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return 100
     }
+
 }
+
 
