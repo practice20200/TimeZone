@@ -13,6 +13,7 @@
 		B3CF8D9728389911006678AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3CF8D9528389911006678AC /* Main.storyboard */; };
 		B3CF8D9928389915006678AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3CF8D9828389915006678AC /* Assets.xcassets */; };
 		B3CF8D9C28389915006678AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3CF8D9A28389915006678AC /* LaunchScreen.storyboard */; };
+		B3CF8DA5283899E0006678AC /* Elements in Frameworks */ = {isa = PBXBuildFile; productRef = B3CF8DA4283899E0006678AC /* Elements */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3CF8DA5283899E0006678AC /* Elements in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +85,9 @@
 			dependencies = (
 			);
 			name = Timezone;
+			packageProductDependencies = (
+				B3CF8DA4283899E0006678AC /* Elements */,
+			);
 			productName = Timezone;
 			productReference = B3CF8D8C28389911006678AC /* Timezone.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +116,9 @@
 				Base,
 			);
 			mainGroup = B3CF8D8328389911006678AC;
+			packageReferences = (
+				B3CF8DA3283899E0006678AC /* XCRemoteSwiftPackageReference "ElementKit" */,
+			);
 			productRefGroup = B3CF8D8D28389911006678AC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -356,6 +364,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B3CF8DA3283899E0006678AC /* XCRemoteSwiftPackageReference "ElementKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/practice20200/ElementKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B3CF8DA4283899E0006678AC /* Elements */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3CF8DA3283899E0006678AC /* XCRemoteSwiftPackageReference "ElementKit" */;
+			productName = Elements;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B3CF8D8428389911006678AC /* Project object */;
 }
