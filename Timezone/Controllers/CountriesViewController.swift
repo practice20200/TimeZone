@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CountriesViewController.swift
 //  Timezone
 //
 //  Created by Apple New on 2022-05-20.
@@ -8,17 +8,13 @@
 import UIKit
 import Elements
 
-class ViewController: UIViewController {
-    
+class CountriesViewController: UIViewController {
+
     var data = [ViewModel]()
-    var scheduledTimer: Timer!
     
-    
-    lazy var timeLable : BaseUILabel = {
+    private var country : BaseUILabel = {
         let label = BaseUILabel()
-        let date = Date()
-        let timeLabel = ConvenientTool.formatterDateDetailed(date: date)
-        label.text = timeLabel
+        label.text = "Country"
         label.layer.shadowOpacity = 0.2
         label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         label.textAlignment = .center
@@ -32,16 +28,16 @@ class ViewController: UIViewController {
         table.register(ViewTableCell.self, forCellReuseIdentifier: "cell")
         return table
     }()
-    
+
     lazy var contentStack : VStack = {
         let stack = VStack()
-        stack.addArrangedSubview(timeLable)
+        stack.addArrangedSubview(country)
         stack.addArrangedSubview(tableView)
         stack.alignment = .center
         return stack
     }()
 
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -52,22 +48,16 @@ class ViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            timeLable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            timeLable.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            country.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            country.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            tableView.topAnchor.constraint(equalTo: timeLable.safeAreaLayoutGuide.topAnchor,constant: 20),
+            tableView.topAnchor.constraint(equalTo: country.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
         ])
         
-        scheduledTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(refreshTime), userInfo: nil, repeats: true)
-        
-        
-        let countryBTN = UIBarButtonItem(title: "Country", style: .plain, target: self, action: #selector(countryHandler))
-        navigationItem.rightBarButtonItem = countryBTN
-
     }
 
     
@@ -75,27 +65,18 @@ class ViewController: UIViewController {
         super.viewWillLayoutSubviews()
         tableView.frame = view.bounds
     }
-
-    
-    @objc func refreshTime(){
-        let date = Date()
-        let timeLabel = ConvenientTool.formatterDateDetailed(date: date)
-        timeLable.text = timeLabel
-    }
      
-    @objc func countryHandler(){
-        let vc = CountriesViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
-}
-
-
-extension ViewController : UITableViewDelegate{
+    
 
 }
 
 
-extension ViewController : UITableViewDataSource {
+extension CountriesViewController : UITableViewDelegate{
+
+}
+
+
+extension CountriesViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return data.count
         return 20
@@ -103,13 +84,6 @@ extension ViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath : IndexPath) -> UITableViewCell {
        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ViewTableCell
-//       let item = data[indexPath.row]
-////
-//        cell.updateView(
-//            time: item.time, content: item.content
-//        )
-////
-//        cell.accessoryType = item.isChecked ? .checkmark: .none
        return cell
     }
     
