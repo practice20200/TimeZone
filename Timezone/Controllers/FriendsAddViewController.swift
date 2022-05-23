@@ -74,8 +74,8 @@ class FriendsAddViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
         
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addHandler))
-        navigationItem.rightBarButtonItem = addButton
+        let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(addHandler))
+        navigationItem.rightBarButtonItem = saveButton
     }
     
     override func viewWillAppear(_ animated: Bool) {
