@@ -12,6 +12,7 @@ class FriendsListCell: UITableViewCell {
     
     lazy var profileImage: BaseUIImageView = {
         let iv = BaseUIImageView()
+        iv.image = UIImage(systemName: "person.crop.circle")
         iv.heightAnchor.constraint(equalToConstant: 60).isActive = true
         iv.widthAnchor.constraint(equalToConstant: 60).isActive = true
         iv.layer.cornerRadius = 30
@@ -21,6 +22,7 @@ class FriendsListCell: UITableViewCell {
     
     lazy var nameLabel: BaseUILabel = {
         let label = BaseUILabel()
+        label.text = "NAME"
         label.font = UIFont.preferredFont(forTextStyle: .headline)
         return label
     }()
@@ -34,11 +36,19 @@ class FriendsListCell: UITableViewCell {
         return iv
     }()
     
+    lazy var countryLabel: BaseUILabel = {
+        let label = BaseUILabel()
+        label.text = "Japan"
+        label.font = UIFont.preferredFont(forTextStyle: .body)
+        return label
+    }()
+    
     lazy var rightStack: HStack = {
         let stack = HStack()
         stack.spacing = 5
-        stack.addArrangedSubview(nameLabel)
         stack.addArrangedSubview(sendImage)
+        stack.addArrangedSubview(nameLabel)
+        stack.addArrangedSubview(countryLabel)
         return stack
     }()
     

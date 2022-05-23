@@ -45,7 +45,7 @@ class FriendsAddViewController: UIViewController {
 
     lazy var tableView : UITableView = {
         let tableView = UITableView()
-        tableView.register(FriendsListCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(FriendsAddTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.backgroundColor = .secondarySystemBackground
         return tableView
     }()
@@ -130,7 +130,8 @@ extension FriendsAddViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FriendsAddTableViewCell
+        let item = data[indexPath.row]
         
         
         return cell

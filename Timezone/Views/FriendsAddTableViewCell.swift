@@ -6,18 +6,41 @@
 //
 
 import UIKit
+import Elements
+
 
 class FriendsAddTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    lazy var textField: BaseUITextField = {
+        let tf = BaseUITextField()
+        tf.placeholder = "Enter"
+        return tf
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupView()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView()
     }
-
+    
+    func setupView() {
+        contentView.addSubview(textField)
+        NSLayoutConstraint.activate([
+            textField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            textField.topAnchor.constraint(equalTo: contentView.topAnchor),
+            textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+        ])
+    }
+    
+//    func updateView(
+//        textField : BaseUITextField,
+//    ) {
+//        textField = textField
+//    }
 }

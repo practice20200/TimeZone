@@ -56,7 +56,7 @@ class FriendViewController: UIViewController {
 
         ])
         
-        let addButton = UIBarButtonItem(image: UIImage(systemName: "person.3.fill"), style: .plain, target: self, action: #selector(addHandler))
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addHandler))
         navigationItem.rightBarButtonItem = addButton
     }
     
@@ -75,8 +75,7 @@ class FriendViewController: UIViewController {
     
     @objc func addHandler(){
         let vc = FriendsAddViewController()
-        let navVC = UINavigationController(rootViewController: vc)
-        present(navVC, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
