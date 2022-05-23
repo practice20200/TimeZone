@@ -1,62 +1,66 @@
 //
-//  FriendsListCell.swift
+//  CountryTableViewCell.swift
 //  Timezone
 //
-//  Created by Apple New on 2022-05-20.
+//  Created by Apple New on 2022-05-23.
 //
 
 import UIKit
 import Elements
 
-class FriendsListCell: UITableViewCell {
-    
-    lazy var profileImage: BaseUIImageView = {
-        let iv = BaseUIImageView()
-        iv.image = UIImage(systemName: "person.crop.circle")
-        iv.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        iv.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        iv.layer.cornerRadius = 30
-        iv.clipsToBounds = true
-        return iv
-    }()
-    
-    lazy var nameLabel: BaseUILabel = {
-        let label = BaseUILabel()
-        label.text = "NAME"
-        label.font = UIFont.preferredFont(forTextStyle: .headline)
-        return label
-    }()
-
-    lazy var sendImage: BaseUIImageView = {
-        let iv = BaseUIImageView()
-        iv.image = UIImage(systemName: "sun.max.fill")
-        let configuration = UIImage.SymbolConfiguration(paletteColors: [.systemPurple])
-        iv.preferredSymbolConfiguration = configuration
-        iv.contentMode = .center
-        return iv
-    }()
+class CountryTableViewCell: UITableViewCell {
     
     lazy var countryLabel: BaseUILabel = {
         let label = BaseUILabel()
         label.text = "Japan"
+        label.font = UIFont.preferredFont(forTextStyle: .headline)
+        label.font = UIFont.systemFont(ofSize: 25)
+        return label
+    }()
+    
+    lazy var firstProfileImage: BaseUIImageView = {
+        let iv = BaseUIImageView()
+        iv.image = UIImage(systemName: "person.crop.circle")
+        iv.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        iv.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        iv.layer.cornerRadius = 15
+        iv.clipsToBounds = true
+        return iv
+    }()
+    
+    lazy var secondProfileImage: BaseUIImageView = {
+        let iv = BaseUIImageView()
+        iv.image = UIImage(systemName: "person.crop.circle")
+        iv.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        iv.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        iv.layer.cornerRadius = 15
+        iv.clipsToBounds = true
+        return iv
+    }()
+    
+    lazy var numberLabel: BaseUILabel = {
+        let label = BaseUILabel()
+        label.text = "+4"
         label.font = UIFont.preferredFont(forTextStyle: .body)
         return label
     }()
     
-    lazy var rightStack: HStack = {
+    lazy var profilePictureContentStack: HStack = {
         let stack = HStack()
-        stack.spacing = 5
-        stack.addArrangedSubview(sendImage)
-        stack.addArrangedSubview(nameLabel)
-        stack.addArrangedSubview(countryLabel)
+        stack.addArrangedSubview(firstProfileImage)
+        stack.addArrangedSubview(secondProfileImage)
+        stack.addArrangedSubview(numberLabel)
+        stack.spacing = 10
+        stack.isLayoutMarginsRelativeArrangement = true
+        stack.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         return stack
     }()
     
+
     lazy var contentStack: HStack = {
         let stack = HStack()
-        stack.addArrangedSubview(profileImage)
-        stack.addArrangedSubview(rightStack)
-        stack.spacing = 16
+        stack.addArrangedSubview(countryLabel)
+        stack.addArrangedSubview(profilePictureContentStack)
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         return stack
@@ -83,18 +87,14 @@ class FriendsListCell: UITableViewCell {
         contentView.addSubview(contentStack)
         
         NSLayoutConstraint.activate([
-            contentStack.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant:  10),
+            contentStack.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant:  15),
             contentStack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-
-            contentStack.leadingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 15),
-            contentStack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+            contentStack.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -10),
         ])
     }
-    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         fatalError("init(coder: ) has not beeb implemented")
     }
-
 
 }

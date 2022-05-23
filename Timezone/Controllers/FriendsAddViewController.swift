@@ -131,9 +131,7 @@ extension FriendsAddViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FriendsAddTableViewCell
-        let item = data[indexPath.row]
-        
-        
+
         return cell
     }
     

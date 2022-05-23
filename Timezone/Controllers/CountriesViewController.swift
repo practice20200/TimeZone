@@ -10,7 +10,7 @@ import Elements
 
 class CountriesViewController: UIViewController {
 
-    var data = [ViewModel]()
+    var data = countryDataProvider.dataProvider()
     
     private var country : BaseUILabel = {
         let label = BaseUILabel()
@@ -25,7 +25,7 @@ class CountriesViewController: UIViewController {
     private let tableView : UITableView = {
         let table = UITableView()
         table.backgroundColor = .secondarySystemBackground
-        table.register(ViewTableCell.self, forCellReuseIdentifier: "cell")
+        table.register(CountryTableViewCell.self, forCellReuseIdentifier: "cell")
         return table
     }()
 
@@ -78,7 +78,13 @@ class CountriesViewController: UIViewController {
 
 
 extension CountriesViewController : UITableViewDelegate{
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CountryTableViewCell
+//        if country.text != cell.countryLabel.text{
+//            country.text = cell.countryLabel.text
+//        }
+        country.text = data[indexPath.row].country
+    }
 }
 
 
@@ -89,7 +95,9 @@ extension CountriesViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath : IndexPath) -> UITableViewCell {
-       let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ViewTableCell
+       let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CountryTableViewCell
+        let item = data[indexPath.row]
+        cell.countryLabel.text = item.country
        return cell
     }
     
@@ -98,3 +106,29 @@ extension CountriesViewController : UITableViewDataSource {
     }
 }
 
+struct countryDataProvider {
+    static func dataProvider() -> [Country] {
+        var data = [Country]()
+        data.append(Country(country: "Japan"))
+        data.append(Country(country: "Japan"))
+        data.append(Country(country: "Japan"))
+        data.append(Country(country: "Japan"))
+        data.append(Country(country: "Japan"))
+        data.append(Country(country: "Japan"))
+        data.append(Country(country: "Japan"))
+        data.append(Country(country: "Japan"))
+        data.append(Country(country: "Japan"))
+        data.append(Country(country: "Japan"))
+        data.append(Country(country: "Japan"))
+        data.append(Country(country: "Japan"))
+        data.append(Country(country: "Japan"))
+        data.append(Country(country: "Japan"))
+        data.append(Country(country: "Japan"))
+        data.append(Country(country: "Japan"))
+        data.append(Country(country: "Canda"))
+        data.append(Country(country: "Japan"))
+        data.append(Country(country: "Japan"))
+        data.append(Country(country: "Japan"))
+        return data
+    }
+}

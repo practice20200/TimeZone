@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B380EBB7283C045500FD6BD1 /* IndividualViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B380EBB6283C045500FD6BD1 /* IndividualViewController.swift */; };
 		B380EBB9283C0DA700FD6BD1 /* FriendsAddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B380EBB8283C0DA700FD6BD1 /* FriendsAddTableViewCell.swift */; };
+		B380EBBB283C142E00FD6BD1 /* CountryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B380EBBA283C142E00FD6BD1 /* CountryTableViewCell.swift */; };
+		B380EBBD283C259E00FD6BD1 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = B380EBBC283C259E00FD6BD1 /* Country.swift */; };
 		B3CF8D9028389911006678AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CF8D8F28389911006678AC /* AppDelegate.swift */; };
 		B3CF8D9228389911006678AC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CF8D9128389911006678AC /* SceneDelegate.swift */; };
 		B3CF8D9428389911006678AC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CF8D9328389911006678AC /* ViewController.swift */; };
@@ -29,6 +31,8 @@
 /* Begin PBXFileReference section */
 		B380EBB6283C045500FD6BD1 /* IndividualViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualViewController.swift; sourceTree = "<group>"; };
 		B380EBB8283C0DA700FD6BD1 /* FriendsAddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsAddTableViewCell.swift; sourceTree = "<group>"; };
+		B380EBBA283C142E00FD6BD1 /* CountryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryTableViewCell.swift; sourceTree = "<group>"; };
+		B380EBBC283C259E00FD6BD1 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		B3CF8D8C28389911006678AC /* Timezone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timezone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3CF8D8F28389911006678AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3CF8D9128389911006678AC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +110,7 @@
 				B3CF8DAB2838A047006678AC /* ViewTableCell.swift */,
 				B3CF8DB72838B0AC006678AC /* FriendsListCell.swift */,
 				B380EBB8283C0DA700FD6BD1 /* FriendsAddTableViewCell.swift */,
+				B380EBBA283C142E00FD6BD1 /* CountryTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -115,6 +120,7 @@
 			children = (
 				B3CF8DAF2838A0BD006678AC /* ViewModel.swift */,
 				B3CF8DB52838B046006678AC /* Friend.swift */,
+				B380EBBC283C259E00FD6BD1 /* Country.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -228,6 +234,8 @@
 				B3CF8DB62838B046006678AC /* Friend.swift in Sources */,
 				B3CF8DB02838A0BD006678AC /* ViewModel.swift in Sources */,
 				B3CF8D9228389911006678AC /* SceneDelegate.swift in Sources */,
+				B380EBBB283C142E00FD6BD1 /* CountryTableViewCell.swift in Sources */,
+				B380EBBD283C259E00FD6BD1 /* Country.swift in Sources */,
 				B3CF8DBA2838B156006678AC /* FriendsAddViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
