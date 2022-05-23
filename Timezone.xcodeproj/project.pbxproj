@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B380EBB7283C045500FD6BD1 /* IndividualViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B380EBB6283C045500FD6BD1 /* IndividualViewController.swift */; };
+		B380EBB9283C0DA700FD6BD1 /* FriendsAddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B380EBB8283C0DA700FD6BD1 /* FriendsAddTableViewCell.swift */; };
 		B3CF8D9028389911006678AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CF8D8F28389911006678AC /* AppDelegate.swift */; };
 		B3CF8D9228389911006678AC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CF8D9128389911006678AC /* SceneDelegate.swift */; };
 		B3CF8D9428389911006678AC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CF8D9328389911006678AC /* ViewController.swift */; };
@@ -25,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B380EBB6283C045500FD6BD1 /* IndividualViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualViewController.swift; sourceTree = "<group>"; };
+		B380EBB8283C0DA700FD6BD1 /* FriendsAddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsAddTableViewCell.swift; sourceTree = "<group>"; };
 		B3CF8D8C28389911006678AC /* Timezone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timezone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3CF8D8F28389911006678AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3CF8D9128389911006678AC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +95,7 @@
 				B3CF8DB12838AA16006678AC /* CountriesViewController.swift */,
 				B3CF8DB32838AE49006678AC /* FriendViewController.swift */,
 				B3CF8DB92838B156006678AC /* FriendsAddViewController.swift */,
+				B380EBB6283C045500FD6BD1 /* IndividualViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -100,6 +105,7 @@
 			children = (
 				B3CF8DAB2838A047006678AC /* ViewTableCell.swift */,
 				B3CF8DB72838B0AC006678AC /* FriendsListCell.swift */,
+				B380EBB8283C0DA700FD6BD1 /* FriendsAddTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -211,8 +217,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3CF8DAE2838A09D006678AC /* ConvenientTool.swift in Sources */,
+				B380EBB7283C045500FD6BD1 /* IndividualViewController.swift in Sources */,
 				B3CF8DB22838AA16006678AC /* CountriesViewController.swift in Sources */,
 				B3CF8D9428389911006678AC /* ViewController.swift in Sources */,
+				B380EBB9283C0DA700FD6BD1 /* FriendsAddTableViewCell.swift in Sources */,
 				B3CF8DAC2838A047006678AC /* ViewTableCell.swift in Sources */,
 				B3CF8DB42838AE49006678AC /* FriendViewController.swift in Sources */,
 				B3CF8DB82838B0AC006678AC /* FriendsListCell.swift in Sources */,

@@ -83,7 +83,9 @@ class FriendViewController: UIViewController {
 
 
 extension FriendViewController : UITableViewDelegate {
-
+    
+//    let vc = IndividualViewController()
+//    navigationController?.pushViewController(vc, animated: true)
     
 }
 

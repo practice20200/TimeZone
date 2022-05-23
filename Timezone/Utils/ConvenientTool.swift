@@ -9,7 +9,7 @@ import Foundation
 class ConvenientTool{
     static func formatterDateDetailed(date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd MM yy HH:mm"
+        formatter.dateFormat = "dd MMM yyyy HH:mm"
         return formatter.string(from: date)
     }
 }
