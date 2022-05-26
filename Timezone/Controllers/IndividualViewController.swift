@@ -10,8 +10,9 @@ import Elements
 
 class IndividualViewController: UIViewController {
 
-    var data = profileVIewDataProvider.dataProvider()
-
+//    var data = profileVIewDataProvider.dataProvider()
+    var data = personData.dataProvider()
+    
     lazy var uiView : UIView = {
         let headerView = BaseUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 300))
         let imageView = UIImageView(frame: CGRect(x: (headerView.bounds.width-150)/2, y: 75, width: 150, height: 150))
@@ -45,7 +46,7 @@ class IndividualViewController: UIViewController {
 
     lazy var tableView : UITableView = {
         let tableView = UITableView()
-        tableView.register(FriendsListCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(IndividualTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.backgroundColor = .secondarySystemBackground
         return tableView
     }()
@@ -60,7 +61,7 @@ class IndividualViewController: UIViewController {
         view.backgroundColor = .systemBackground
         updateDeletedAccount()
         updateAccountName()
-        title = "Friends"
+        title = personData.dataProvider()[0].1
         
         view.addSubview(tableView)
         tableView.tableHeaderView = uiView
@@ -73,9 +74,7 @@ class IndividualViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
-        
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addHandler))
-        navigationItem.rightBarButtonItem = addButton
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,9 +101,7 @@ class IndividualViewController: UIViewController {
     }
     
     
-    @objc func addHandler(){
-
-    }
+    var person1 = Profile(name: "Josh", Location: "BC, Van", Timezone: "California, US", PreferrableCountryTime: "10:00-18:00")
     
 }
 
@@ -122,7 +119,7 @@ extension IndividualViewController : UITableViewDelegate {
 extension IndividualViewController : UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return data.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -130,20 +127,36 @@ extension IndividualViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! IndividualTableViewCell
+        
+        var item = data[indexPath.section]
+        cell.nameLabel.text = item.1
         
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 75
     }
 
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         tableView.backgroundColor = .systemCyan
-        return data[section]
+        return data[section].0
     }
 
 }
+
+
+struct personData {
+    static func dataProvider() -> [(String, String)] {
+        return [
+            ("user name", "John"),
+            ("Location", "California, US"),
+            ("Timezone", "California, US"),
+            ("Prewferrable time", "10:00 - 18:00")
+        ]
+    }
+}
+

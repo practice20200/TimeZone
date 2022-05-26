@@ -60,7 +60,7 @@ class FriendsAddViewController: UIViewController {
         view.backgroundColor = .systemBackground
         updateDeletedAccount()
         updateAccountName()
-        title = "Friends"
+        title = "Add a friend"
         
         view.addSubview(tableView)
         tableView.tableHeaderView = uiView
@@ -136,7 +136,7 @@ extension FriendsAddViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 75
     }
 
     
