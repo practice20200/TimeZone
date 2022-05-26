@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     var data = [ViewModel]()
     var scheduledTimer: Timer!
-    
+    var result: Result?
     
     lazy var timeLable : BaseUILabel = {
         let label = BaseUILabel()
@@ -47,6 +47,7 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(contentStack)
         
+        parseJSON()
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -87,6 +88,27 @@ class ViewController: UIViewController {
         let vc = CountriesViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+   func parseJSON(){
+        guard let path = Bundle.main.path(forResource: "data", ofType: "json") else { return }
+                
+        let url = URL(fileURLWithPath: path)
+        
+        
+        do {
+            let jsonData = try Data(contentsOf: url)
+            result = try JSONDecoder().decode(Result.self, from:  jsonData)
+            
+            if let result = result {
+                print("reslt: \(result)")
+            }else {
+                print("Failed to parse")
+            }
+            
+        }catch{
+            print("Error: \(error.localizedDescription)")
+        }
+    }
 }
 
 
@@ -117,4 +139,18 @@ extension ViewController : UITableViewDataSource {
         return 75
     }
 }
+
+struct Result: Codable {
+    let data: [ResultItem]
+}
+
+struct ResultItem: Codable {
+    let value: String
+    let abbr: String
+    let offset: Float
+    let isdst: Bool
+    let text: String
+    let utc: [String]
+}
+
 
