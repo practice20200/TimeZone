@@ -48,7 +48,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         view.addSubview(contentStack)
-        navigationItem.largeTitleDisplayMode = .never
+//        navigationItem.largeTitleDisplayMode = .never
         
         parseJSON()
         tableView.delegate = self
@@ -73,6 +73,7 @@ class ViewController: UIViewController {
         
         let countryBTN = UIBarButtonItem(title: "Country", style: .plain, target: self, action: #selector(countryHandler))
         navigationItem.rightBarButtonItem = countryBTN
+        navigationController?.isNavigationBarHidden = false
     }
 
     

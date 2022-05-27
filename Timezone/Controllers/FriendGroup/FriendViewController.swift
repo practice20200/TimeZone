@@ -12,10 +12,9 @@ class FriendViewController: UIViewController {
 
     private var country : BaseUILabel = {
         let label = BaseUILabel()
-        label.text = "Friends"
+        label.text = "   Friends"
         label.layer.shadowOpacity = 0.2
         label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
-        label.textAlignment = .center
         label.heightAnchor.constraint(equalToConstant: 75).isActive = true
         return label
     }()
@@ -31,7 +30,6 @@ class FriendViewController: UIViewController {
         let stack = VStack()
         stack.addArrangedSubview(country)
         stack.addArrangedSubview(tableView)
-        stack.alignment = .center
         return stack
     }()
 

@@ -55,6 +55,8 @@ class CategolizedFriendGroupViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
         ])
+        
+        
     }
     
 

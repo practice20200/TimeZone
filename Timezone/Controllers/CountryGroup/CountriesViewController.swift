@@ -13,15 +13,13 @@ class CountriesViewController: UIViewController {
     var data = countryDataProvider.dataProvider()
     var countryName = "Country"
     
-//    private var country : BaseUILabel = {
-//        let label = BaseUILabel()
-//        label.text = "Country"
-//        label.layer.shadowOpacity = 0.2
-//        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
-//        label.textAlignment = .center
-//        label.heightAnchor.constraint(equalToConstant: 75).isActive = true
-//        return label
-//    }()
+    private var country : BaseUILabel = {
+        let label = BaseUILabel()
+        label.text = "  Country"
+        label.font = UIFont.systemFont(ofSize: 40, weight: .bold)
+        label.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        return label
+    }()
     
     private let tableView : UITableView = {
         let table = UITableView()
@@ -30,57 +28,57 @@ class CountriesViewController: UIViewController {
         return table
     }()
 
-//    lazy var contentStack : VStack = {
-//        let stack = VStack()
-//        stack.addArrangedSubview(country)
-//        stack.addArrangedSubview(tableView)
-//        stack.alignment = .center
-//        return stack
-//    }()
+    lazy var contentStack : VStack = {
+        let stack = VStack()
+        stack.addArrangedSubview(country)
+        stack.addArrangedSubview(tableView)
+        return stack
+    }()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = countryName
-        navigationItem.largeTitleDisplayMode = .always
-        navigationController?.navigationBar.prefersLargeTitles = true
+//        title = countryName
+//        navigationItem.largeTitleDisplayMode = .always
+//        navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationController?.isNavigationBarHidden = true
+        view.addSubview(contentStack)
+
+        tableView.delegate = self
+        tableView.dataSource = self
+
+        NSLayoutConstraint.activate([
+
+            country.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            country.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+            tableView.topAnchor.constraint(equalTo: country.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+        ])
+        
 //        view.addSubview(contentStack)
 //
 //        tableView.delegate = self
 //        tableView.dataSource = self
 //
 //        NSLayoutConstraint.activate([
-//
-//            country.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            country.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//
-//            tableView.topAnchor.constraint(equalTo: country.safeAreaLayoutGuide.topAnchor),
-//            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-//
+//            contentStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//            contentStack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            contentStack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            contentStack.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 //        ])
         
-        view.addSubview(tableView)
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
-        
-        let friendBTN = UIBarButtonItem(title: "Friend", style: .plain, target: self, action: #selector(friendHandler))
-        navigationItem.rightBarButtonItem = friendBTN
+//        let friendBTN = UIBarButtonItem(title: "Friend", style: .plain, target: self, action: #selector(friendHandler))
+//        navigationItem.rightBarButtonItem = friendBTN
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        title = countryName
+//        title = countryName
     }
     
     override func viewWillLayoutSubviews() {
@@ -90,8 +88,9 @@ class CountriesViewController: UIViewController {
      
     @objc func friendHandler(){
         let vc = FriendViewController()
-        let navVC = UINavigationController(rootViewController: vc)
-        present(navVC, animated: true)
+//        let navVC = UINavigationController(rootViewController: vc)
+//        present(navVC, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
 
 }

@@ -79,6 +79,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B3C9F2822841891B00AE5FB1 /* CountryGroup */ = {
+			isa = PBXGroup;
+			children = (
+				B3CF8DB12838AA16006678AC /* CountriesViewController.swift */,
+				B3C9F27C28414E9800AE5FB1 /* CategolizedFriendGroupViewController.swift */,
+			);
+			path = CountryGroup;
+			sourceTree = "<group>";
+		};
+		B3C9F2832841895200AE5FB1 /* FriendGroup */ = {
+			isa = PBXGroup;
+			children = (
+				B3CF8DB32838AE49006678AC /* FriendViewController.swift */,
+				B380EBB6283C045500FD6BD1 /* IndividualViewController.swift */,
+				B3CF8DB92838B156006678AC /* FriendsAddViewController.swift */,
+			);
+			path = FriendGroup;
+			sourceTree = "<group>";
+		};
 		B3CF8D8328389911006678AC = {
 			isa = PBXGroup;
 			children = (
@@ -112,12 +131,9 @@
 		B3CF8DA628389FB5006678AC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B3C9F2832841895200AE5FB1 /* FriendGroup */,
+				B3C9F2822841891B00AE5FB1 /* CountryGroup */,
 				B3CF8D9328389911006678AC /* ViewController.swift */,
-				B3CF8DB12838AA16006678AC /* CountriesViewController.swift */,
-				B3CF8DB32838AE49006678AC /* FriendViewController.swift */,
-				B3CF8DB92838B156006678AC /* FriendsAddViewController.swift */,
-				B380EBB6283C045500FD6BD1 /* IndividualViewController.swift */,
-				B3C9F27C28414E9800AE5FB1 /* CategolizedFriendGroupViewController.swift */,
 				B3C9F28028416C4A00AE5FB1 /* TabBarViewController.swift */,
 			);
 			path = Controllers;
