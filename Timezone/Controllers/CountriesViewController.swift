@@ -11,16 +11,17 @@ import Elements
 class CountriesViewController: UIViewController {
 
     var data = countryDataProvider.dataProvider()
+    var countryName = "Country"
     
-    private var country : BaseUILabel = {
-        let label = BaseUILabel()
-        label.text = "Country"
-        label.layer.shadowOpacity = 0.2
-        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
-        label.textAlignment = .center
-        label.heightAnchor.constraint(equalToConstant: 75).isActive = true
-        return label
-    }()
+//    private var country : BaseUILabel = {
+//        let label = BaseUILabel()
+//        label.text = "Country"
+//        label.layer.shadowOpacity = 0.2
+//        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+//        label.textAlignment = .center
+//        label.heightAnchor.constraint(equalToConstant: 75).isActive = true
+//        return label
+//    }()
     
     private let tableView : UITableView = {
         let table = UITableView()
@@ -29,39 +30,58 @@ class CountriesViewController: UIViewController {
         return table
     }()
 
-    lazy var contentStack : VStack = {
-        let stack = VStack()
-        stack.addArrangedSubview(country)
-        stack.addArrangedSubview(tableView)
-        stack.alignment = .center
-        return stack
-    }()
+//    lazy var contentStack : VStack = {
+//        let stack = VStack()
+//        stack.addArrangedSubview(country)
+//        stack.addArrangedSubview(tableView)
+//        stack.alignment = .center
+//        return stack
+//    }()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        view.addSubview(contentStack)
+        title = countryName
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
+//        view.addSubview(contentStack)
+//
+//        tableView.delegate = self
+//        tableView.dataSource = self
+//
+//        NSLayoutConstraint.activate([
+//
+//            country.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//            country.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//
+//            tableView.topAnchor.constraint(equalTo: country.safeAreaLayoutGuide.topAnchor),
+//            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+//
+//        ])
+        
+        view.addSubview(tableView)
         
         tableView.delegate = self
         tableView.dataSource = self
         
         NSLayoutConstraint.activate([
-            
-            country.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            country.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            tableView.topAnchor.constraint(equalTo: country.safeAreaLayoutGuide.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-
         ])
         
         let friendBTN = UIBarButtonItem(title: "Friend", style: .plain, target: self, action: #selector(friendHandler))
         navigationItem.rightBarButtonItem = friendBTN
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        title = countryName
+    }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -79,11 +99,14 @@ class CountriesViewController: UIViewController {
 
 extension CountriesViewController : UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CountryTableViewCell
-//        if country.text != cell.countryLabel.text{
-//            country.text = cell.countryLabel.text
-//        }
-        country.text = data[indexPath.row].country
+
+        
+        
+        let vc = CategolizedFriendGroupViewController()
+        vc.selectedCountry = data[indexPath.row].country
+        countryName = data[indexPath.row].country
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

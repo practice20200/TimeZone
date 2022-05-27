@@ -129,7 +129,7 @@ extension IndividualViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! IndividualTableViewCell
         
-        var item = data[indexPath.section]
+        let item = data[indexPath.section]
         cell.nameLabel.text = item.1
         
         

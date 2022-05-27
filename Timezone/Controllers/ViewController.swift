@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     var data = [Result]()
     var scheduledTimer: Timer!
     var result: Result?
+    var passedIndexPath: IndexPath?
+    var passedSection = 0
     
     lazy var timeLable : BaseUILabel = {
         let label = BaseUILabel()
@@ -46,6 +48,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         view.addSubview(contentStack)
+        navigationItem.largeTitleDisplayMode = .never
         
         parseJSON()
         tableView.delegate = self
@@ -63,12 +66,13 @@ class ViewController: UIViewController {
 
         ])
         
+        
+//        guard passedIndexPath != nil, let passedIndexPath = passedIndexPath else { return }
 //        scheduledTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(refreshTime), userInfo: nil, repeats: true)
         
         
         let countryBTN = UIBarButtonItem(title: "Country", style: .plain, target: self, action: #selector(countryHandler))
         navigationItem.rightBarButtonItem = countryBTN
-
     }
 
     
@@ -78,8 +82,17 @@ class ViewController: UIViewController {
     }
 
     
+//    @objc func refreshTime(indexPath: IndexPath, section: Int){
+//        let date = Date()+7
+//        let timeLabel = ConvenientTool.formatterDateDetailed(date: date)
+//        timeLable.text = timeLabel
+//        let item = data[indexPath.section]
+//        let convertedTime = Int(item.data[indexPath.row].offset)+7
+//        timeLable.text = ConvenientTool.formatterDateDetailed(date: Date()+TimeInterval(convertedTime)*3600)
+//    }
+    
     @objc func refreshTime(){
-        let date = Date()
+        let date = Date()+7
         let timeLabel = ConvenientTool.formatterDateDetailed(date: date)
         timeLable.text = timeLabel
     }
@@ -115,6 +128,8 @@ class ViewController: UIViewController {
 
 extension ViewController : UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        passedIndexPath = indexPath
+        passedSection = indexPath.section
         let item = data[indexPath.section]
         let convertedTime = Int(item.data[indexPath.row].offset)+7
         timeLable.text = ConvenientTool.formatterDateDetailed(date: Date()+TimeInterval(convertedTime)*3600) 
