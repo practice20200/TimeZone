@@ -116,7 +116,7 @@ class ViewController: UIViewController {
 extension ViewController : UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = data[indexPath.section]
-        let convertedTime = Int(item.data[indexPath.row].offset)
+        let convertedTime = Int(item.data[indexPath.row].offset)+7
         timeLable.text = ConvenientTool.formatterDateDetailed(date: Date()+TimeInterval(convertedTime)*3600) 
     }
 }
@@ -124,7 +124,7 @@ extension ViewController : UITableViewDelegate{
 
 extension ViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 75
+        return data[section].data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath : IndexPath) -> UITableViewCell {
