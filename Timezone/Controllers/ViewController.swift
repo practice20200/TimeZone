@@ -10,7 +10,7 @@ import Elements
 
 class ViewController: UIViewController {
     
-    var data = [ViewModel]()
+    var data = [Result]()
     var scheduledTimer: Timer!
     var result: Result?
     
@@ -63,7 +63,7 @@ class ViewController: UIViewController {
 
         ])
         
-        scheduledTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(refreshTime), userInfo: nil, repeats: true)
+//        scheduledTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(refreshTime), userInfo: nil, repeats: true)
         
         
         let countryBTN = UIBarButtonItem(title: "Country", style: .plain, target: self, action: #selector(countryHandler))
@@ -101,6 +101,7 @@ class ViewController: UIViewController {
             
             if let result = result {
                 print("reslt: \(result)")
+                data.append(result)
             }else {
                 print("Failed to parse")
             }
@@ -113,23 +114,26 @@ class ViewController: UIViewController {
 
 
 extension ViewController : UITableViewDelegate{
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = data[indexPath.section]
+        let convertedTime = Int(item.data[indexPath.row].offset)
+        timeLable.text = ConvenientTool.formatterDateDetailed(date: Date()+TimeInterval(convertedTime)*3600) 
+    }
 }
 
 
 extension ViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return data.count
-        return 20
+        return 75
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath : IndexPath) -> UITableViewCell {
        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ViewTableCell
-//       let item = data[indexPath.row]
+        let item = data[indexPath.section]
 ////
-//        cell.updateView(
-//            time: item.time, content: item.content
-//        )
+        cell.updateView(
+            time: item.data[indexPath.row].value, content: item.data[indexPath.row].text
+        )
 ////
 //        cell.accessoryType = item.isChecked ? .checkmark: .none
        return cell
@@ -140,17 +144,7 @@ extension ViewController : UITableViewDataSource {
     }
 }
 
-struct Result: Codable {
-    let data: [ResultItem]
-}
 
-struct ResultItem: Codable {
-    let value: String
-    let abbr: String
-    let offset: Float
-    let isdst: Bool
-    let text: String
-    let utc: [String]
-}
+
 
 

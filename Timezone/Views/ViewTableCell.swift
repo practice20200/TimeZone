@@ -14,23 +14,24 @@ class ViewTableCell : UITableViewCell{
     lazy var timeLabel: BaseUILabel = {
         let label = BaseUILabel()
         label.font = UIFont.systemFont(ofSize: 18)
+//        label.widthAnchor.constraint(equalToConstant: 200).isActive = true
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
     lazy var contentLabel: BaseUILabel = {
         let label = BaseUILabel()
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = UIFont.systemFont(ofSize: 13)
         label.adjustsFontSizeToFitWidth = true
-        label.numberOfLines = 2
+        label.numberOfLines = 3
         return label
     }()
     
-    lazy var contentStack: HStack = {
-        let stack = HStack()
+    lazy var contentStack: VStack = {
+        let stack = VStack()
         stack.addArrangedSubview(timeLabel)
         stack.addArrangedSubview(contentLabel)
-        stack.spacing = 16
+        stack.spacing = 5
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 20)
         return stack
@@ -49,10 +50,8 @@ class ViewTableCell : UITableViewCell{
     func setupView() {
         contentView.addSubview(contentStack)
         NSLayoutConstraint.activate([
-            contentStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            contentStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            contentStack.topAnchor.constraint(equalTo: contentView.topAnchor),
-            contentStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+   
+            contentStack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
             
         ])
     }
