@@ -14,12 +14,10 @@ class CategolizedFriendGroupViewController: UIViewController {
     var data = ProfileDataProvider.dataProvider()
     var selectedCountry = ""
     
-    lazy var timeLable : BaseUILabel = {
+    lazy var countryLable : BaseUILabel = {
         let label = BaseUILabel()
-        label.text = selectedCountry
-        label.layer.shadowOpacity = 0.2
-        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
-        label.textAlignment = .center
+        label.text = "  " + selectedCountry
+        label.font = UIFont.systemFont(ofSize: 35, weight: .bold)
         label.heightAnchor.constraint(equalToConstant: 75).isActive = true
         return label
     }()
@@ -30,26 +28,32 @@ class CategolizedFriendGroupViewController: UIViewController {
         table.register(CategolizedFriendGroupViewControllerCell.self, forCellReuseIdentifier: "cell")
         return table
     }()
+    
+    lazy var contentStack : VStack = {
+        let stack = VStack()
+        stack.addArrangedSubview(countryLable)
+        stack.addArrangedSubview(tableView)
+        return stack
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        view.addSubview(timeLable)
-        view.addSubview(tableView)
+        view.addSubview(contentStack)
+//        view.addSubview(tableView)
         
-        title = timeLable.text
-        navigationItem.largeTitleDisplayMode = .always
-        navigationController?.navigationBar.prefersLargeTitles = true
+//        title = timeLable.text
+//        navigationItem.largeTitleDisplayMode = .always
+//        navigationController?.navigationBar.prefersLargeTitles = true
         
         tableView.delegate = self
         tableView.dataSource = self
         
         NSLayoutConstraint.activate([
-            
-            timeLable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            timeLable.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            tableView.topAnchor.constraint(equalTo: timeLable.safeAreaLayoutGuide.topAnchor,constant: 20),
+            countryLable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            countryLable.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+            tableView.topAnchor.constraint(equalTo: countryLable.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -73,6 +77,8 @@ extension CategolizedFriendGroupViewController : UITableViewDelegate{
 //        country.text = data[indexPath.row].country
         
         let vc = IndividualViewController()
+        vc.navigationItem.largeTitleDisplayMode = .never
+        vc.navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.pushViewController(vc, animated: true)
     }
 }

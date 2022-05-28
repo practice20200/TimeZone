@@ -48,6 +48,7 @@ class IndividualViewController: UIViewController {
         let tableView = UITableView()
         tableView.register(IndividualTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.backgroundColor = .secondarySystemBackground
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
 
@@ -67,12 +68,15 @@ class IndividualViewController: UIViewController {
         tableView.dataSource = self
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
 //        navigationController?.isNavigationBarHidden = true
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addHandler))
+        navigationItem.rightBarButtonItem = addButton
+        
 
     }
     
@@ -90,7 +94,11 @@ class IndividualViewController: UIViewController {
     }
 
     
-
+    @objc func addHandler(){
+        let vc = FriendsAddViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func updateDeletedAccount(){
         
     }

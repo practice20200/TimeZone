@@ -13,9 +13,9 @@ class FriendsListCell: UITableViewCell {
     lazy var profileImage: BaseUIImageView = {
         let iv = BaseUIImageView()
         iv.image = UIImage(systemName: "person.crop.circle")
-        iv.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        iv.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        iv.layer.cornerRadius = 30
+        iv.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        iv.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        iv.layer.cornerRadius = 15
         iv.clipsToBounds = true
         return iv
     }()

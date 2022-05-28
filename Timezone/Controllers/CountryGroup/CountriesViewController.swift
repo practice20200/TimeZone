@@ -16,7 +16,7 @@ class CountriesViewController: UIViewController {
     private var country : BaseUILabel = {
         let label = BaseUILabel()
         label.text = "  Country"
-        label.font = UIFont.systemFont(ofSize: 40, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 35, weight: .bold)
         label.heightAnchor.constraint(equalToConstant: 75).isActive = true
         return label
     }()

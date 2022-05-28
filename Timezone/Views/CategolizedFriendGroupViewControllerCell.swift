@@ -14,8 +14,8 @@ class CategolizedFriendGroupViewControllerCell: UITableViewCell {
     lazy var firstProfileImage: BaseUIImageView = {
         let iv = BaseUIImageView()
         iv.image = UIImage(systemName: "person.crop.circle")
-        iv.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        iv.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        iv.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        iv.widthAnchor.constraint(equalToConstant: 30).isActive = true
         iv.layer.cornerRadius = 15
         iv.clipsToBounds = true
         return iv

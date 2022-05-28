@@ -13,10 +13,29 @@ class FriendViewController: UIViewController {
     private var country : BaseUILabel = {
         let label = BaseUILabel()
         label.text = "   Friends"
-        label.layer.shadowOpacity = 0.2
-        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+//        label.layer.shadowOpacity = 0.2
+        label.font = UIFont.systemFont(ofSize: 35, weight: .bold)
         label.heightAnchor.constraint(equalToConstant: 75).isActive = true
+//        label.backgroundColor = .blue
         return label
+    }()
+    
+    lazy var addBTN : BaseUIButton = {
+        let button = BaseUIButton()
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.layer.borderColor = UIColor.systemBackground.cgColor
+        button.layer.borderWidth = 2
+        button.layer.cornerRadius = 25
+        button.contentMode = .topRight
+        button.addTarget(self, action: #selector(addHandler), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var lableStack : HStack = {
+        let stack = HStack()
+        stack.addArrangedSubview(country)
+        stack.addArrangedSubview(addBTN)
+        return stack
     }()
     
     private let tableView : UITableView = {
@@ -28,7 +47,7 @@ class FriendViewController: UIViewController {
 
     lazy var contentStack : VStack = {
         let stack = VStack()
-        stack.addArrangedSubview(country)
+        stack.addArrangedSubview(lableStack)
         stack.addArrangedSubview(tableView)
         return stack
     }()
@@ -37,37 +56,42 @@ class FriendViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
         view.addSubview(contentStack)
+       
         
         tableView.delegate = self
         tableView.dataSource = self
         
         NSLayoutConstraint.activate([
             
-            country.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            country.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            lableStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            lableStack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            lableStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
-            tableView.topAnchor.constraint(equalTo: country.safeAreaLayoutGuide.topAnchor),
+            tableView.topAnchor.constraint(equalTo: lableStack.safeAreaLayoutGuide.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
         ])
         
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addHandler))
-        navigationItem.rightBarButtonItem = addButton
+        
+//        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addHandler))
+//        navigationItem.rightBarButtonItem = addButton
+//        navigationItem.titleView?.sendSubviewToBack(tableView)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-      
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//
+//    }
 
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        tableView.frame = view.bounds
+//        tableView.frame = view.bounds
     }
 
     
@@ -83,8 +107,10 @@ class FriendViewController: UIViewController {
 extension FriendViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            let vc = IndividualViewController()
-            navigationController?.pushViewController(vc, animated: true)
+        let vc = IndividualViewController()
+        vc.navigationItem.largeTitleDisplayMode = .never
+        vc.navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 
