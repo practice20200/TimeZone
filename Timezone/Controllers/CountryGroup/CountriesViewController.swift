@@ -39,10 +39,6 @@ class CountriesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-//        title = countryName
-//        navigationItem.largeTitleDisplayMode = .always
-//        navigationController?.navigationBar.prefersLargeTitles = true
-//        navigationController?.isNavigationBarHidden = true
         view.addSubview(contentStack)
 
         tableView.delegate = self
@@ -60,25 +56,10 @@ class CountriesViewController: UIViewController {
 
         ])
         
-//        view.addSubview(contentStack)
-//
-//        tableView.delegate = self
-//        tableView.dataSource = self
-//
-//        NSLayoutConstraint.activate([
-//            contentStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            contentStack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            contentStack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            contentStack.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-//        ])
-        
-//        let friendBTN = UIBarButtonItem(title: "Friend", style: .plain, target: self, action: #selector(friendHandler))
-//        navigationItem.rightBarButtonItem = friendBTN
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        title = countryName
     }
     
     override func viewWillLayoutSubviews() {
@@ -88,8 +69,6 @@ class CountriesViewController: UIViewController {
      
     @objc func friendHandler(){
         let vc = FriendViewController()
-//        let navVC = UINavigationController(rootViewController: vc)
-//        present(navVC, animated: true)
         navigationController?.pushViewController(vc, animated: true)
     }
 

@@ -19,6 +19,8 @@
 		B3C9F27D28414E9800AE5FB1 /* CategolizedFriendGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C9F27C28414E9800AE5FB1 /* CategolizedFriendGroupViewController.swift */; };
 		B3C9F27F2841517C00AE5FB1 /* CategolizedFriendGroupViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C9F27E2841517C00AE5FB1 /* CategolizedFriendGroupViewControllerCell.swift */; };
 		B3C9F28128416C4A00AE5FB1 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C9F28028416C4A00AE5FB1 /* TabBarViewController.swift */; };
+		B3C9F2862841A50300AE5FB1 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = B3C9F2852841A50300AE5FB1 /* Realm */; };
+		B3C9F2882841A50300AE5FB1 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B3C9F2872841A50300AE5FB1 /* RealmSwift */; };
 		B3CF8D9028389911006678AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CF8D8F28389911006678AC /* AppDelegate.swift */; };
 		B3CF8D9228389911006678AC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CF8D9128389911006678AC /* SceneDelegate.swift */; };
 		B3CF8D9428389911006678AC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CF8D9328389911006678AC /* ViewController.swift */; };
@@ -72,6 +74,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3C9F2882841A50300AE5FB1 /* RealmSwift in Frameworks */,
+				B3C9F2862841A50300AE5FB1 /* Realm in Frameworks */,
 				B3CF8DA5283899E0006678AC /* Elements in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -203,6 +207,8 @@
 			name = Timezone;
 			packageProductDependencies = (
 				B3CF8DA4283899E0006678AC /* Elements */,
+				B3C9F2852841A50300AE5FB1 /* Realm */,
+				B3C9F2872841A50300AE5FB1 /* RealmSwift */,
 			);
 			productName = Timezone;
 			productReference = B3CF8D8C28389911006678AC /* Timezone.app */;
@@ -234,6 +240,7 @@
 			mainGroup = B3CF8D8328389911006678AC;
 			packageReferences = (
 				B3CF8DA3283899E0006678AC /* XCRemoteSwiftPackageReference "ElementKit" */,
+				B3C9F2842841A50300AE5FB1 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = B3CF8D8D28389911006678AC /* Products */;
 			projectDirPath = "";
@@ -502,6 +509,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B3C9F2842841A50300AE5FB1 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		B3CF8DA3283899E0006678AC /* XCRemoteSwiftPackageReference "ElementKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/practice20200/ElementKit";
@@ -513,6 +528,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B3C9F2852841A50300AE5FB1 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3C9F2842841A50300AE5FB1 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		B3C9F2872841A50300AE5FB1 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3C9F2842841A50300AE5FB1 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		B3CF8DA4283899E0006678AC /* Elements */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B3CF8DA3283899E0006678AC /* XCRemoteSwiftPackageReference "ElementKit" */;
