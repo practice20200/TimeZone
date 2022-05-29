@@ -63,7 +63,9 @@ class FriendViewController: UIViewController {
         view.backgroundColor = .white
         
         view.addSubview(contentStack)
-       
+        for i in realm.objects(Profile.self){
+            data.append(i)
+        }
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -117,6 +119,7 @@ extension FriendViewController : UITableViewDelegate {
         let vc = IndividualViewController()
         vc.navigationItem.largeTitleDisplayMode = .never
         vc.navigationController?.navigationBar.prefersLargeTitles = false
+        vc.data = 
         navigationController?.pushViewController(vc, animated: true)
     }
     

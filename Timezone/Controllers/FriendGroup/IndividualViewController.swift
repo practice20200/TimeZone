@@ -11,7 +11,11 @@ import Elements
 class IndividualViewController: UIViewController {
 
 //    var data = profileVIewDataProvider.dataProvider()
-    var data = personData.dataProvider()
+    var data = Profile()
+    var text1 = "Enter name"
+    var text2 = "Enter location"
+    var text3 = "Enter timezone"
+    var text4 = "Enter preferrable contact time"
     
     lazy var uiView : UIView = {
         let headerView = BaseUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 300))
@@ -126,7 +130,7 @@ extension IndividualViewController : UITableViewDelegate {
 extension IndividualViewController : UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return data.count
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -136,7 +140,7 @@ extension IndividualViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! IndividualTableViewCell
         
-        let item = data[indexPath.section]
+        let item = data[indexPath.row]
         cell.nameLabel.text = item.1
         
         

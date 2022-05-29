@@ -203,7 +203,9 @@ class FriendsAddViewController: UIViewController {
             new.Location = text3
             new.PreferrableCountryTime = text4
             realm.add(new)
-            vc.data.append(new)
+            let userData = realm.objects(Profile.self)
+            print("全てのデータ\(userData[93])")
+//            vc.data.append([userData])
             print("new.name: \(new.name)")
             try! realm.commitWrite()
     //        navigationController?.popViewController(animated: true)
