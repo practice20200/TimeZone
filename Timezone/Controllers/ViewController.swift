@@ -11,10 +11,12 @@ import Elements
 class ViewController: UIViewController {
     
     var data = [Result]()
+    var isCheckedData = [isChekedResult]()
     var scheduledTimer: Timer!
     var result: Result?
     var passedIndexPath: IndexPath?
     var passedSection = 0
+    var trueFalseChecker = false
     
     lazy var timeLable : BaseUILabel = {
         let label = BaseUILabel()
@@ -48,7 +50,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         view.addSubview(contentStack)
-//        navigationItem.largeTitleDisplayMode = .never
         
         parseJSON()
         tableView.delegate = self
@@ -116,6 +117,7 @@ class ViewController: UIViewController {
             if let result = result {
                 print("reslt: \(result)")
                 data.append(result)
+                isCheckedData.append(isChekedResult(result: result, isChecked: false))
             }else {
                 print("Failed to parse")
             }
@@ -133,7 +135,12 @@ extension ViewController : UITableViewDelegate{
         passedSection = indexPath.section
         let item = data[indexPath.section]
         let convertedTime = Int(item.data[indexPath.row].offset)+7
-        timeLable.text = ConvenientTool.formatterDateDetailed(date: Date()+TimeInterval(convertedTime)*3600) 
+        timeLable.text = ConvenientTool.formatterDateDetailed(date: Date()+TimeInterval(convertedTime)*3600)
+        print("isCheckedData[indexPath.row].isChecked: \(isCheckedData.count)")
+//
+//        isCheckedData[indexPath.row].isChecked.toggle()
+//        tableView.reloadRows(at: [indexPath], with: .fade)
+//        isCheckedData[indexPath.row].ref?.updateChildValues(["isChecked" : data[indexPath.row].isChecked])
     }
 }
 
@@ -145,12 +152,19 @@ extension ViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath : IndexPath) -> UITableViewCell {
        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ViewTableCell
-        let item = data[indexPath.section]
+        let item = isCheckedData[indexPath.section]
 ////
         cell.updateView(
-            time: item.data[indexPath.row].value, content: item.data[indexPath.row].text
-        )
+            time: item.result.data[indexPath.row].value, content: item.result.data[indexPath.row].text, isChecked: false)
+       
+        if trueFalseChecker == true {
+            cell.accessoryType = .checkmark
+            print("Tapped")
+        }else {
+            print("error")
+        }
 ////
+        
 //        cell.accessoryType = item.isChecked ? .checkmark: .none
        return cell
     }

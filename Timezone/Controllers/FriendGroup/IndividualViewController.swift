@@ -108,7 +108,7 @@ class IndividualViewController: UIViewController {
     }
     
     
-    var person1 = Profile(name: "Josh", Location: "BC, Van", Timezone: "California, US", PreferrableCountryTime: "10:00-18:00")
+    var person1 = Profile()
     
 }
 
@@ -144,13 +144,17 @@ extension IndividualViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 75
+        return 50
     }
 
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         tableView.backgroundColor = .systemCyan
         return data[section].0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 15
     }
 
 }

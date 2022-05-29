@@ -7,8 +7,13 @@
 
 import UIKit
 import Elements
+import Realm
+import RealmSwift
 
 class FriendViewController: UIViewController {
+    
+    var data = [Profile]()
+    let realm = try! Realm()
 
     private var country : BaseUILabel = {
         let label = BaseUILabel()
@@ -97,10 +102,12 @@ class FriendViewController: UIViewController {
     
     @objc func addHandler(){
         let vc = FriendsAddViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        let navVC = UINavigationController(rootViewController: vc)
+        present(navVC, animated: true)
+//        navigationController?.pushViewController(vc, animated: true)
     }
     
-    var data = personData.dataProvider()
+//    var data = personData.dataProvider()
 }
 
 
@@ -113,20 +120,28 @@ extension FriendViewController : UITableViewDelegate {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            realm.beginWrite()
+            data.remove(at: indexPath.row)
+            try! realm.commitWrite()
+        }
+    }
     
 }
 
 extension FriendViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return data.count
-        return 20
+        return data.count
+//        return 20
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FriendsListCell
-        let item = data[indexPath.section].1
-        cell.nameLabel.text = item
+        let item = data[indexPath.row]
+        cell.nameLabel.text = item.name
+        cell.countryLabel.text = item.Location
+
         return cell
     }
     

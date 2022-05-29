@@ -7,14 +7,31 @@
 
 import UIKit
 import Elements
+import SwiftUI
 
+protocol FriendsAddTableViewCellDelegate: AnyObject {
+//    let textField = UITextField().text
+//    func FriendsAddTableViewCellDelegateHandler(data: )
+}
 
 class FriendsAddTableViewCell: UITableViewCell {
 
-    lazy var textField: BaseUITextField = {
-        let tf = BaseUITextField()
-        tf.placeholder = "Enter"
-        return tf
+    
+    
+//    lazy var textField: BaseUITextField = {
+//        let tf = BaseUITextField()
+//        tf.placeholder = "Enter"
+//        return tf
+//    }()
+    
+    lazy var inputLabel: BaseUILabel = {
+        let label = BaseUILabel()
+        let vc = FriendsAddViewController()
+        label.text = "Enter"
+        label.textColor = .systemGray3
+        label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.font = UIFont.systemFont(ofSize: 15)
+        return label
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -28,12 +45,12 @@ class FriendsAddTableViewCell: UITableViewCell {
     }
     
     func setupView() {
-        contentView.addSubview(textField)
+        contentView.addSubview(inputLabel)
         NSLayoutConstraint.activate([
-            textField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            textField.topAnchor.constraint(equalTo: contentView.topAnchor),
-            textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            inputLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+            inputLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            inputLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            inputLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
         ])
     }

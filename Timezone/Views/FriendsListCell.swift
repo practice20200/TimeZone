@@ -52,7 +52,15 @@ class FriendsListCell: UITableViewCell {
         return stack
     }()
     
-    lazy var contentStack: HStack = {
+    lazy var arrowImageView: BaseUIImageView = {
+        let iv = BaseUIImageView()
+        iv.image = UIImage(systemName: "chevron.right")
+        iv.contentMode = .center
+        iv.clipsToBounds = true
+        return iv
+    }()
+    
+    lazy var leftContentStack: HStack = {
         let stack = HStack()
         stack.addArrangedSubview(profileImage)
         stack.addArrangedSubview(rightStack)
@@ -62,6 +70,17 @@ class FriendsListCell: UITableViewCell {
         return stack
     }()
     
+    lazy var contentStack: HStack = {
+        let stack = HStack()
+        stack.addArrangedSubview(leftContentStack)
+        stack.addArrangedSubview(arrowImageView)
+        stack.isLayoutMarginsRelativeArrangement = true
+        stack.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        return stack
+    }()
+    
+    
+   
     lazy var gradientLayer : CAGradientLayer = {
         let color = CAGradientLayer()
         color.colors = [
@@ -80,14 +99,16 @@ class FriendsListCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(contentStack)
+        contentView.addSubview(leftContentStack)
+        contentView.addSubview(arrowImageView)
+        
         
         NSLayoutConstraint.activate([
-            contentStack.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant:  10),
-            contentStack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-
-            contentStack.leadingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 15),
-            contentStack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+            leftContentStack.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant:  10),
+            leftContentStack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            
+            arrowImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            arrowImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         ])
     }
     

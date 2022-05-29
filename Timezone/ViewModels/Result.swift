@@ -9,3 +9,8 @@ import Foundation
 struct Result: Codable {
     let data: [ResultItem]
 }
+
+struct isChekedResult{
+    var result: Result
+    var isChecked: Bool
+}

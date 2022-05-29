@@ -40,11 +40,6 @@ class CategolizedFriendGroupViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         view.addSubview(contentStack)
-//        view.addSubview(tableView)
-        
-//        title = timeLable.text
-//        navigationItem.largeTitleDisplayMode = .always
-//        navigationController?.navigationBar.prefersLargeTitles = true
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -60,13 +55,19 @@ class CategolizedFriendGroupViewController: UIViewController {
 
         ])
         
-        
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addHandler))
+        navigationItem.rightBarButtonItem = addButton
     }
     
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         tableView.frame = view.bounds
+    }
+    
+    @objc func addHandler(){
+        let vc = FriendsAddViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -107,11 +108,11 @@ extension CategolizedFriendGroupViewController : UITableViewDataSource {
 struct ProfileDataProvider {
     static func dataProvider() -> [Profile] {
         var data = [Profile]()
-        data.append(Profile(name: "John", Location: "Japan", Timezone: "Japan", PreferrableCountryTime: "18:00-22:00"))
-        data.append(Profile(name: "James", Location: "Japan", Timezone: "Japan", PreferrableCountryTime: "18:00-22:00"))
-        data.append(Profile(name: "Tony", Location: "Japan", Timezone: "Japan", PreferrableCountryTime: "18:00-22:00"))
-        data.append(Profile(name: "Fred", Location: "Japan", Timezone: "Japan", PreferrableCountryTime: "18:00-22:00"))
-        data.append(Profile(name: "Neil", Location: "Japan", Timezone: "Japan", PreferrableCountryTime: "18:00-22:00"))
+//        data.append(Profile(name: "John", Location: "Japan", Timezone: "Japan", PreferrableCountryTime: "18:00-22:00"))
+//        data.append(Profile(name: "James", Location: "Japan", Timezone: "Japan", PreferrableCountryTime: "18:00-22:00"))
+//        data.append(Profile(name: "Tony", Location: "Japan", Timezone: "Japan", PreferrableCountryTime: "18:00-22:00"))
+//        data.append(Profile(name: "Fred", Location: "Japan", Timezone: "Japan", PreferrableCountryTime: "18:00-22:00"))
+//        data.append(Profile(name: "Neil", Location: "Japan", Timezone: "Japan", PreferrableCountryTime: "18:00-22:00"))
         
         return data
     }
