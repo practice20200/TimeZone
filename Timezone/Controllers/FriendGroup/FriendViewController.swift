@@ -119,7 +119,8 @@ extension FriendViewController : UITableViewDelegate {
         let vc = IndividualViewController()
         vc.navigationItem.largeTitleDisplayMode = .never
         vc.navigationController?.navigationBar.prefersLargeTitles = false
-        vc.data = 
+        let passingData = data[indexPath.row]
+        vc.data = Profile(value: passingData)
         navigationController?.pushViewController(vc, animated: true)
     }
     

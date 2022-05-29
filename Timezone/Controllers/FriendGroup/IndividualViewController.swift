@@ -140,9 +140,15 @@ extension IndividualViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! IndividualTableViewCell
         
-        let item = data[indexPath.row]
-        cell.nameLabel.text = item.1
-        
+        if indexPath.section == 0{
+            cell.nameLabel.text = data.name
+        }else if indexPath.section == 1{
+            cell.nameLabel.text = data.Location
+        }else if indexPath.section == 2{
+            cell.nameLabel.text = data.Timezone
+        }else if indexPath.section == 3{
+            cell.nameLabel.text = data.PreferrableCountryTime
+        }
         
         return cell
     }
@@ -153,8 +159,8 @@ extension IndividualViewController : UITableViewDataSource {
 
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        tableView.backgroundColor = .systemCyan
-        return data[section].0
+        let titleData = personData.dataProvider()
+        return titleData[section].0
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

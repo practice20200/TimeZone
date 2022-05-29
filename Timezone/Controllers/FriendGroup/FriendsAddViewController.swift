@@ -63,7 +63,6 @@ class FriendsAddViewController: UIViewController {
     lazy var tableView : UITableView = {
         let tableView = UITableView()
         tableView.register(FriendsAddTableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.sectionIndexColor = .systemGray2
         tableView.backgroundColor = .secondarySystemBackground
         return tableView
     }()
@@ -98,8 +97,6 @@ class FriendsAddViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-
     }
 
     override func viewWillLayoutSubviews() {
@@ -309,7 +306,7 @@ extension FriendsAddViewController : UITableViewDataSource {
 
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        tableView.sectionIndexColor = .secondarySystemBackground
+        
         return data[section].0
     }
     
