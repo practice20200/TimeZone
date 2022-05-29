@@ -12,10 +12,12 @@ class IndividualViewController: UIViewController {
 
 //    var data = profileVIewDataProvider.dataProvider()
     var data = Profile()
+    var profileImage: UIImage?
     var text1 = "Enter name"
     var text2 = "Enter location"
     var text3 = "Enter timezone"
     var text4 = "Enter preferrable contact time"
+//    let realm = try! Realm()
     
     lazy var uiView : UIView = {
         let headerView = BaseUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 300))
@@ -25,7 +27,16 @@ class IndividualViewController: UIViewController {
         imageView.layer.borderWidth = 3
         imageView.layer.cornerRadius = imageView.bounds.width/2
         imageView.layer.masksToBounds = true
-        let image = UIImage(systemName: "person.2.circle")
+//        let image = UIImage(systemName: "person.crop.circle")
+        guard let image = UIImage(contentsOfFile: data.profileImage)  else{
+            print("imagefetch nil: \(data.profileImage)")
+            
+            
+            return UIView()
+            
+            
+            
+        }
         let configuration = UIImage.SymbolConfiguration(paletteColors:
          [.white])
         imageView.image = image
@@ -64,8 +75,7 @@ class IndividualViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-//        title = personData.dataProvider()[0].1
-        
+
         view.addSubview(tableView)
         tableView.tableHeaderView = uiView
         tableView.delegate = self
@@ -139,7 +149,7 @@ extension IndividualViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! IndividualTableViewCell
-        
+     
         if indexPath.section == 0{
             cell.nameLabel.text = data.name
         }else if indexPath.section == 1{

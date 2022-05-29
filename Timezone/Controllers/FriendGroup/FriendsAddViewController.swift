@@ -10,7 +10,7 @@ import Elements
 import RealmSwift
 import Realm
 
-class FriendsAddViewController: UIViewController {
+class FriendsAddViewController: UIViewController, UINavigationControllerDelegate {
     
     var data = profileVIewDataProvider.dataProvider()
     let realm = try! Realm()
@@ -20,6 +20,7 @@ class FriendsAddViewController: UIViewController {
     var text2 = "Enter location"
     var text3 = "Enter timezone"
     var text4 = "Enter preferrable contact time"
+    var profileImage = "person.crop.circle"
     
     let defaultText1 = "Enter name"
     let defaultText2 = "Enter location"
@@ -28,20 +29,26 @@ class FriendsAddViewController: UIViewController {
     
     static let identifier = "tableViewCell"
     weak var FriendsAddTableViewCellDelegate : FriendsAddTableViewCellDelegate?
-
+    var image = UIImage(systemName: "person.crop.circle")
+    var imageView = UIImageView()
     lazy var uiView : UIView = {
         let headerView = BaseUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 300))
-        let imageView = UIImageView(frame: CGRect(x: (headerView.bounds.width-150)/2, y: 75, width: 150, height: 150))
+        imageView = UIImageView(frame: CGRect(x: (headerView.bounds.width-150)/2, y: 75, width: 150, height: 150))
         imageView.contentMode = .scaleAspectFill
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.borderWidth = 3
         imageView.layer.cornerRadius = imageView.bounds.width/2
         imageView.layer.masksToBounds = true
-        let image = UIImage(systemName: "person.2.circle")
+        
         let configuration = UIImage.SymbolConfiguration(paletteColors:
          [.white])
         imageView.image = image
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTappedImage))
         imageView.preferredSymbolConfiguration = configuration
+        gesture.numberOfTapsRequired = 1
+        gesture.numberOfTapsRequired = 1
+        imageView.addGestureRecognizer(gesture)
+        imageView.isUserInteractionEnabled = true
         
         let contentView = UIView()
         contentView.layer.addSublayer(gradientLayer)
@@ -105,7 +112,15 @@ class FriendsAddViewController: UIViewController {
         gradientLayer.frame = uiView.bounds
     }
 
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        let vc = FriendViewController()
+        for i in realm.objects(Profile.self){
+            vc.data.append(i)
+        }
+        tableView.reloadData()
+print("4444444444444444444444")
+    }
     
     
     
@@ -195,13 +210,14 @@ class FriendsAddViewController: UIViewController {
            text4 != defaultText4 {
             
             realm.beginWrite()
+            new.profileImage = profileImage
             new.name = text1
             new.Timezone = text2
             new.Location = text3
             new.PreferrableCountryTime = text4
             realm.add(new)
             let userData = realm.objects(Profile.self)
-            print("全てのデータ\(userData[93])")
+            print("全てのデータ\(userData)")
 //            vc.data.append([userData])
             print("new.name: \(new.name)")
             try! realm.commitWrite()
@@ -209,6 +225,13 @@ class FriendsAddViewController: UIViewController {
             navigationController?.dismiss(animated: true)
             print("========================new: \(vc.data)")
         }
+    }
+    
+    @objc func didTappedImage(){
+        print("Tapped")
+        presentPhotoActionSheet()
+
+
     }
 }
 
@@ -343,3 +366,69 @@ extension FriendsAddViewController : FriendsAddTableViewCellDelegate {
 
 
 
+extension FriendsAddViewController: UIImagePickerControllerDelegate {
+    
+    func presentPhotoActionSheet(){
+        let actionSheet = UIAlertController(title: "Profile Picture", message: "How would you like to select your picture?", preferredStyle: .actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let takePhotoAction = UIAlertAction(title: "Take a photo", style: .default) { [weak self] _ in
+            self?.presentCamera()
+        }
+        let selectPhotoAction = UIAlertAction(title: "Choose a photo", style: .default) { [weak self] _ in
+            self?.presentPhotoPicker()
+        }
+        actionSheet.addAction(cancelAction)
+        actionSheet.addAction(takePhotoAction)
+        actionSheet.addAction(selectPhotoAction)
+        present(actionSheet, animated: true)
+    }
+    
+    func presentCamera(){
+        let vc = UIImagePickerController()
+        vc.sourceType = .camera
+        vc.delegate = self
+        vc.allowsEditing = true
+        present(vc, animated: true)
+    }
+    
+    func presentPhotoPicker(){
+        let vc = UIImagePickerController()
+        vc.sourceType = .photoLibrary
+        vc.delegate = self
+        vc.allowsEditing = true
+        present(vc, animated: true)
+    }
+    
+    //when users chose
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        print(info)
+        
+        picker.dismiss(animated: true, completion: nil)
+        guard let imagee = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else{ return }
+        imageView.image = imagee
+//        spinner.show(in: view)
+        
+//        let alertView = UIAlertController(title: "Edit Profile picture", message: "Would you like to change your profile picture?", preferredStyle: .alert)
+//        let confirmAction = UIAlertAction(title: "confirm", style: .default) { [weak self] _ in
+//            self?.profileImage = image.description
+//            print("image.description: \(image.description)")
+//            self?.image = image
+//
+//        }
+//
+//        let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
+//        alertView.addAction(confirmAction)
+//        alertView.addAction(cancelAction)
+//
+//        navigationController?.present(alertView, animated: true, completion: nil)
+//        spinner.dismiss(animated: true)
+   }
+
+    // users cancel
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+        
+    }
+}

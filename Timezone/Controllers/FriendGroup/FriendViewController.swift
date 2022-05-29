@@ -13,15 +13,14 @@ import RealmSwift
 class FriendViewController: UIViewController {
     
     var data = [Profile]()
+    let dataRef = [Profile]()
     let realm = try! Realm()
 
     private var country : BaseUILabel = {
         let label = BaseUILabel()
         label.text = "   Friends"
-//        label.layer.shadowOpacity = 0.2
         label.font = UIFont.systemFont(ofSize: 35, weight: .bold)
         label.heightAnchor.constraint(equalToConstant: 75).isActive = true
-//        label.backgroundColor = .blue
         return label
     }()
     
@@ -58,18 +57,23 @@ class FriendViewController: UIViewController {
     }()
 
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
         view.addSubview(contentStack)
-        for i in realm.objects(Profile.self){
-            data.append(i)
-        }
         
         tableView.delegate = self
         tableView.dataSource = self
         
+        for i in realm.objects(Profile.self){
+            data.append(i)
+        }
+        
+        tableView.reloadData()
         NSLayoutConstraint.activate([
             
             lableStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -80,36 +84,30 @@ class FriendViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-
         ])
         
-        
-//        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addHandler))
-//        navigationItem.rightBarButtonItem = addButton
-//        navigationItem.titleView?.sendSubviewToBack(tableView)
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        realm.refresh()
+        tableView.reloadData()
+    }
 
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-//        tableView.frame = view.bounds
     }
 
+    
+    
+    
     
     @objc func addHandler(){
         let vc = FriendsAddViewController()
         let navVC = UINavigationController(rootViewController: vc)
         present(navVC, animated: true)
-//        navigationController?.pushViewController(vc, animated: true)
     }
-    
-//    var data = personData.dataProvider()
 }
 
 
@@ -127,7 +125,10 @@ extension FriendViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
             realm.beginWrite()
-            data.remove(at: indexPath.row)
+            let item = data
+            
+            realm.delete(item)
+            
             try! realm.commitWrite()
         }
     }

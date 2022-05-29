@@ -19,8 +19,9 @@ import RealmSwift
 
 
 class Profile: Object{
-    @objc dynamic  var name: String = "Name"
-    @objc dynamic  var Location: String = "Canada"
-    @objc dynamic  var Timezone: String = "Calfornia, US"
-    @objc dynamic  var PreferrableCountryTime: String = "10:00-18:00"
+    @objc dynamic var profileImage: String = "person.crop.circle"
+    @objc dynamic var name: String = "Name"
+    @objc dynamic var Location: String = "Canada"
+    @objc dynamic var Timezone: String = "Calfornia, US"
+    @objc dynamic var PreferrableCountryTime: String = "10:00-18:00"
 }
