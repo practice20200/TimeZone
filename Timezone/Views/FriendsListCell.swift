@@ -10,12 +10,13 @@ import Elements
 
 class FriendsListCell: UITableViewCell {
     
-    lazy var profileImage: BaseUIImageView = {
-        let iv = BaseUIImageView()
+    lazy var profileImage: UIImageView = {
+        let iv = UIImageView()
         iv.image = UIImage(systemName: "person.crop.circle")
         iv.heightAnchor.constraint(equalToConstant: 30).isActive = true
         iv.widthAnchor.constraint(equalToConstant: 30).isActive = true
         iv.layer.cornerRadius = 15
+        iv.translatesAutoresizingMaskIntoConstraints = false
         iv.clipsToBounds = true
         return iv
     }()

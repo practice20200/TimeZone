@@ -15,6 +15,8 @@ class FriendViewController: UIViewController {
     var data = [Profile]()
     let dataRef = [Profile]()
     let realm = try! Realm()
+    var imageView = UIImageView()
+    var profileImage = "person.crop.circle"
 
     private var country : BaseUILabel = {
         let label = BaseUILabel()
@@ -65,15 +67,17 @@ class FriendViewController: UIViewController {
         view.backgroundColor = .white
         
         view.addSubview(contentStack)
-        
         tableView.delegate = self
         tableView.dataSource = self
         
-        for i in realm.objects(Profile.self){
-            data.append(i)
-        }
+//        for i in realm.objects(Profile.self){
+//            data.append(i)
+//            print("data=================append: \(i)")
+//        }
         
-        tableView.reloadData()
+//        let realmdata = realm.objects(Profile.self)
+//        data.append(contentsOf: realmdata)
+        
         NSLayoutConstraint.activate([
             
             lableStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -90,19 +94,17 @@ class FriendViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        realm.refresh()
+        print("===============================================WillAppear")
+        let realmdata = realm.objects(Profile.self)
+        data = realmdata.reversed()
         tableView.reloadData()
     }
-
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        print("===============================================willlayout")
     }
 
-    
-    
-    
-    
     @objc func addHandler(){
         let vc = FriendsAddViewController()
         let navVC = UINavigationController(rootViewController: vc)
@@ -119,6 +121,8 @@ extension FriendViewController : UITableViewDelegate {
         vc.navigationController?.navigationBar.prefersLargeTitles = false
         let passingData = data[indexPath.row]
         vc.data = Profile(value: passingData)
+        vc.index = indexPath.row
+        print("passingData.profileImage:\(passingData.profileImage)")
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -146,7 +150,8 @@ extension FriendViewController : UITableViewDataSource {
         let item = data[indexPath.row]
         cell.nameLabel.text = item.name
         cell.countryLabel.text = item.Location
-
+        
+        cell.profileImage.image =  UIImage(contentsOfFile: item.profileImage) ?? UIImage(systemName: "person.crop.circle")!
         return cell
     }
     
@@ -157,3 +162,14 @@ extension FriendViewController : UITableViewDataSource {
 }
 
 
+extension FriendViewController: UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        guard let imagee = info[UIImagePickerController.InfoKey(rawValue: profileImage) ] as? UIImage else{
+            print("imagepIcker nil")
+            return }
+        
+    }
+    
+ 
+}

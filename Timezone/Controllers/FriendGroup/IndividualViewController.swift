@@ -7,6 +7,8 @@
 
 import UIKit
 import Elements
+import Realm
+import RealmSwift
 
 class IndividualViewController: UIViewController {
 
@@ -17,7 +19,9 @@ class IndividualViewController: UIViewController {
     var text2 = "Enter location"
     var text3 = "Enter timezone"
     var text4 = "Enter preferrable contact time"
-//    let realm = try! Realm()
+    let realm = try! Realm()
+    var index = 0
+    var pndData = UIImage().pngData()
     
     lazy var uiView : UIView = {
         let headerView = BaseUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 300))
@@ -28,15 +32,25 @@ class IndividualViewController: UIViewController {
         imageView.layer.cornerRadius = imageView.bounds.width/2
         imageView.layer.masksToBounds = true
 //        let image = UIImage(systemName: "person.crop.circle")
-        guard let image = UIImage(contentsOfFile: data.profileImage)  else{
-            print("imagefetch nil: \(data.profileImage)")
-            
-            
+        var imageDataURL = realm.objects(Profile.self)
+        
+        print("==========================data.profileImage: \(imageDataURL)")
+        let fileURL = URL(string: imageDataURL[index].profileImage)
+        
+        guard fileURL != nil, let fileURL = fileURL else{
+            print("==========================fileURL nil")
+            return UIView()}
+        let filePath = fileURL.path
+        print("==========================filePath: \(filePath)")
+        
+        guard UIImage(contentsOfFile: filePath) != nil, let image = UIImage(contentsOfFile: filePath)  else{
+            print("========================imagefetch nil: \(filePath)")
             return UIView()
-            
-            
-            
         }
+        
+//        imageView.sd_setImage(with: fileURL)
+        
+        print("Success")
         let configuration = UIImage.SymbolConfiguration(paletteColors:
          [.white])
         imageView.image = image

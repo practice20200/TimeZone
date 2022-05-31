@@ -31,6 +31,9 @@ class FriendsAddViewController: UIViewController, UINavigationControllerDelegate
     weak var FriendsAddTableViewCellDelegate : FriendsAddTableViewCellDelegate?
     var image = UIImage(systemName: "person.crop.circle")
     var imageView = UIImageView()
+    
+    let manager = FileManager.default
+    
     lazy var uiView : UIView = {
         let headerView = BaseUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 300))
         imageView = UIImageView(frame: CGRect(x: (headerView.bounds.width-150)/2, y: 75, width: 150, height: 150))
@@ -84,6 +87,8 @@ class FriendsAddViewController: UIViewController, UINavigationControllerDelegate
         view.backgroundColor = .systemBackground
         title = "Add a friend"
         
+        let vc = FriendViewController()
+        vc.data = [Profile]()
         view.addSubview(tableView)
         tableView.tableHeaderView = uiView
         tableView.delegate = self
@@ -112,17 +117,12 @@ class FriendsAddViewController: UIViewController, UINavigationControllerDelegate
         gradientLayer.frame = uiView.bounds
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        let vc = FriendViewController()
-        for i in realm.objects(Profile.self){
-            vc.data.append(i)
-        }
-        tableView.reloadData()
-print("4444444444444444444444")
-    }
-    
-    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        let vc = FriendViewController()
+//    }
+//
+//
     
     
     func nameAlertViewHandler(title: String){
@@ -203,36 +203,68 @@ print("4444444444444444444444")
     @objc func saveHandler(){
         let new = Profile()
         let vc = FriendViewController()
-        
+        createLocalDataFile()
         if text1 != defaultText1,
            text2 != defaultText2,
            text3 != defaultText3,
            text4 != defaultText4 {
             
             realm.beginWrite()
-            new.profileImage = profileImage
+            new.profileImage = url.absoluteString
             new.name = text1
             new.Timezone = text2
             new.Location = text3
             new.PreferrableCountryTime = text4
             realm.add(new)
             let userData = realm.objects(Profile.self)
-            print("全てのデータ\(userData)")
+            print("All realm data\(userData)")
 //            vc.data.append([userData])
             print("new.name: \(new.name)")
+            vc.data = userData.reversed()
             try! realm.commitWrite()
     //        navigationController?.popViewController(animated: true)
             navigationController?.dismiss(animated: true)
             print("========================new: \(vc.data)")
+            print("imageDescription: \(profileImage)")
         }
+        
     }
+    
+    
     
     @objc func didTappedImage(){
         print("Tapped")
         presentPhotoActionSheet()
-
-
     }
+    
+    var url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+//    print("url:\(url)")
+    
+//        let newFolder = url.appendingPathComponent("FirstFile")
+    let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+    
+    @objc func firBTNHandler(){
+//        var url = manager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+//        print("url:\(url)")
+//
+////        let newFolder = url.appendingPathComponent("FirstFile")
+//        let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        
+//        do{
+//            try manager.createDirectory(at: newFolder, withIntermediateDirectories: true, attributes: [:])
+//        }catch{
+//            print("Error first BTN: \(error.localizedDescription)")
+//        }
+    }
+    
+    func createLocalDataFile() {
+        let fileName = "\(NSUUID().uuidString).png"
+        if url != nil {
+            let path = url.appendingPathComponent(fileName)
+            url = path
+        }
+    }
+    
 }
 
 
@@ -408,22 +440,6 @@ extension FriendsAddViewController: UIImagePickerControllerDelegate {
         picker.dismiss(animated: true, completion: nil)
         guard let imagee = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else{ return }
         imageView.image = imagee
-//        spinner.show(in: view)
-        
-//        let alertView = UIAlertController(title: "Edit Profile picture", message: "Would you like to change your profile picture?", preferredStyle: .alert)
-//        let confirmAction = UIAlertAction(title: "confirm", style: .default) { [weak self] _ in
-//            self?.profileImage = image.description
-//            print("image.description: \(image.description)")
-//            self?.image = image
-//
-//        }
-//
-//        let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
-//        alertView.addAction(confirmAction)
-//        alertView.addAction(cancelAction)
-//
-//        navigationController?.present(alertView, animated: true, completion: nil)
-//        spinner.dismiss(animated: true)
    }
 
     // users cancel

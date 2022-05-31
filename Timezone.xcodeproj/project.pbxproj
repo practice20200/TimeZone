@@ -16,6 +16,8 @@
 		B3C2D47228403BEC007F8113 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = B3C2D47128403BEC007F8113 /* data.json */; };
 		B3C321D92840C6A9006221B8 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C321D82840C6A9006221B8 /* Result.swift */; };
 		B3C321DB2840C6CB006221B8 /* ResultItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C321DA2840C6CB006221B8 /* ResultItem.swift */; };
+		B3C640E82845EB1C00FAE8E4 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = B3C640E72845EB1C00FAE8E4 /* SDWebImage */; };
+		B3C640EA2845EB1C00FAE8E4 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B3C640E92845EB1C00FAE8E4 /* SDWebImageMapKit */; };
 		B3C9F27D28414E9800AE5FB1 /* CategolizedFriendGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C9F27C28414E9800AE5FB1 /* CategolizedFriendGroupViewController.swift */; };
 		B3C9F27F2841517C00AE5FB1 /* CategolizedFriendGroupViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C9F27E2841517C00AE5FB1 /* CategolizedFriendGroupViewControllerCell.swift */; };
 		B3C9F28128416C4A00AE5FB1 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C9F28028416C4A00AE5FB1 /* TabBarViewController.swift */; };
@@ -75,7 +77,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3C9F2882841A50300AE5FB1 /* RealmSwift in Frameworks */,
+				B3C640EA2845EB1C00FAE8E4 /* SDWebImageMapKit in Frameworks */,
 				B3C9F2862841A50300AE5FB1 /* Realm in Frameworks */,
+				B3C640E82845EB1C00FAE8E4 /* SDWebImage in Frameworks */,
 				B3CF8DA5283899E0006678AC /* Elements in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -209,6 +213,8 @@
 				B3CF8DA4283899E0006678AC /* Elements */,
 				B3C9F2852841A50300AE5FB1 /* Realm */,
 				B3C9F2872841A50300AE5FB1 /* RealmSwift */,
+				B3C640E72845EB1C00FAE8E4 /* SDWebImage */,
+				B3C640E92845EB1C00FAE8E4 /* SDWebImageMapKit */,
 			);
 			productName = Timezone;
 			productReference = B3CF8D8C28389911006678AC /* Timezone.app */;
@@ -241,6 +247,7 @@
 			packageReferences = (
 				B3CF8DA3283899E0006678AC /* XCRemoteSwiftPackageReference "ElementKit" */,
 				B3C9F2842841A50300AE5FB1 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				B3C640E62845EB1C00FAE8E4 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = B3CF8D8D28389911006678AC /* Products */;
 			projectDirPath = "";
@@ -511,6 +518,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B3C640E62845EB1C00FAE8E4 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		B3C9F2842841A50300AE5FB1 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift";
@@ -530,6 +545,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B3C640E72845EB1C00FAE8E4 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3C640E62845EB1C00FAE8E4 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		B3C640E92845EB1C00FAE8E4 /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3C640E62845EB1C00FAE8E4 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
 		B3C9F2852841A50300AE5FB1 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B3C9F2842841A50300AE5FB1 /* XCRemoteSwiftPackageReference "realm-swift" */;
