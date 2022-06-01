@@ -36,17 +36,20 @@ class IndividualViewController: UIViewController {
         
         print("==========================data.profileImage: \(imageDataURL)")
         let fileURL = URL(string: imageDataURL[index].profileImage)
-        
+        print("fileURL: \(fileURL)")
         guard fileURL != nil, let fileURL = fileURL else{
             print("==========================fileURL nil")
             return UIView()}
         let filePath = fileURL.path
         print("==========================filePath: \(filePath)")
-        
-        guard UIImage(contentsOfFile: filePath) != nil, let image = UIImage(contentsOfFile: filePath)  else{
+//
+        guard UIImage(contentsOfFile: filePath) != nil, let image = UIImage(contentsOfFile:filePath)  else{
             print("========================imagefetch nil: \(filePath)")
             return UIView()
         }
+//
+//        let image = UIImage(contentsOfFile: filePath)
+        
         
 //        imageView.sd_setImage(with: fileURL)
         
@@ -127,16 +130,6 @@ class IndividualViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func updateDeletedAccount(){
-        
-    }
-    
-    func updateAccountName(){
-
-    }
-    
-    
-    var person1 = Profile()
     
 }
 

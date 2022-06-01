@@ -13,7 +13,8 @@ import RealmSwift
 class FriendViewController: UIViewController {
     
     var data = [Profile]()
-    let dataRef = [Profile]()
+    var sortedData = [(String, Profile)]()
+    var dataRef = [Profile]()
     let realm = try! Realm()
     var imageView = UIImageView()
     var profileImage = "person.crop.circle"
@@ -70,10 +71,11 @@ class FriendViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-//        for i in realm.objects(Profile.self){
-//            data.append(i)
-//            print("data=================append: \(i)")
-//        }
+        for i in realm.objects(Profile.self){
+            guard let character = i.name.first else { return }
+            sortedData.append((String(character), i))
+            print("data=================append: \(i)")
+        }
         
 //        let realmdata = realm.objects(Profile.self)
 //        data.append(contentsOf: realmdata)
@@ -97,6 +99,7 @@ class FriendViewController: UIViewController {
         print("===============================================WillAppear")
         let realmdata = realm.objects(Profile.self)
         data = realmdata.reversed()
+        dataRef = data
         tableView.reloadData()
     }
     
@@ -107,8 +110,9 @@ class FriendViewController: UIViewController {
 
     @objc func addHandler(){
         let vc = FriendsAddViewController()
-        let navVC = UINavigationController(rootViewController: vc)
-        present(navVC, animated: true)
+//        let navVC = UINavigationController(rootViewController: vc)
+//        present(navVC, animated: true)
+        navigationController?.pushViewController(vc , animated:  true)
     }
 }
 
@@ -127,15 +131,26 @@ extension FriendViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete{
-            realm.beginWrite()
-            let item = data
-            
-            realm.delete(item)
-            
-            try! realm.commitWrite()
+
+        if editingStyle == .delete {
+
+            try! realm.write {
+                let item = data[indexPath.row]
+                realm.delete(item)
+                data.remove(at: indexPath.row)
+            }
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
+    
+//    func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+//           try! realm.write {
+//               let listItem = data[fromIndexPath.row]
+//               data.remove(at: fromIndexPath.row)
+//               data.insert(listItem, at: to.row)
+//           }
+//       }
+    
     
 }
 
@@ -158,6 +173,11 @@ extension FriendViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
     }
+    
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        let titleData = sortedData[section]
+//        return titleData[section]
+//    }
 
 }
 

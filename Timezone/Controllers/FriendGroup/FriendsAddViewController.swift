@@ -103,8 +103,6 @@ class FriendsAddViewController: UIViewController, UINavigationControllerDelegate
         
         let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveHandler))
         navigationItem.rightBarButtonItem = saveButton
-        
-        tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -116,13 +114,8 @@ class FriendsAddViewController: UIViewController, UINavigationControllerDelegate
         tableView.frame = view.bounds
         gradientLayer.frame = uiView.bounds
     }
-
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        let vc = FriendViewController()
-//    }
-//
-//
+    
+    
     
     
     func nameAlertViewHandler(title: String){
@@ -203,7 +196,7 @@ class FriendsAddViewController: UIViewController, UINavigationControllerDelegate
     @objc func saveHandler(){
         let new = Profile()
         let vc = FriendViewController()
-        createLocalDataFile()
+//        createLocalDataFile()
         if text1 != defaultText1,
            text2 != defaultText2,
            text3 != defaultText3,
@@ -218,12 +211,12 @@ class FriendsAddViewController: UIViewController, UINavigationControllerDelegate
             realm.add(new)
             let userData = realm.objects(Profile.self)
             print("All realm data\(userData)")
+            print("==========================new.profileImage: \(new.profileImage)")
 //            vc.data.append([userData])
             print("new.name: \(new.name)")
             vc.data = userData.reversed()
             try! realm.commitWrite()
-    //        navigationController?.popViewController(animated: true)
-            navigationController?.dismiss(animated: true)
+            navigationController?.popViewController(animated: true)
             print("========================new: \(vc.data)")
             print("imageDescription: \(profileImage)")
         }
@@ -238,23 +231,21 @@ class FriendsAddViewController: UIViewController, UINavigationControllerDelegate
     }
     
     var url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-//    print("url:\(url)")
-    
-//        let newFolder = url.appendingPathComponent("FirstFile")
     let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
     
     @objc func firBTNHandler(){
-//        var url = manager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-//        print("url:\(url)")
-//
-////        let newFolder = url.appendingPathComponent("FirstFile")
+        let url = manager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        print("url:\(url)")
+
+        let newFolder = url.appendingPathComponent("FirstFile")
 //        let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         
-//        do{
-//            try manager.createDirectory(at: newFolder, withIntermediateDirectories: true, attributes: [:])
-//        }catch{
-//            print("Error first BTN: \(error.localizedDescription)")
-//        }
+        do{
+            try manager.createDirectory(at: newFolder, withIntermediateDirectories: true, attributes: [:])
+            
+        }catch{
+            print("Error first BTN: \(error.localizedDescription)")
+        }
     }
     
     func createLocalDataFile() {
@@ -262,6 +253,12 @@ class FriendsAddViewController: UIViewController, UINavigationControllerDelegate
         if url != nil {
             let path = url.appendingPathComponent(fileName)
             url = path
+        }
+        do{
+            try manager.createDirectory(at: url, withIntermediateDirectories: true, attributes: [:])
+            
+        }catch{
+            print("Error first BTN: \(error.localizedDescription)")
         }
     }
     
@@ -300,9 +297,6 @@ extension FriendsAddViewController : UITableViewDelegate {
         print("indexPath.section====================\(indexPath.section)")
 
     }
-    
-
-    
 }
 
 extension FriendsAddViewController : UITableViewDataSource {
@@ -317,9 +311,6 @@ extension FriendsAddViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FriendsAddTableViewCell
-        
-        
-        
         if indexPath.section == 0{
             cell.inputLabel.text = text1
             if text1 != defaultText1{
@@ -368,8 +359,6 @@ extension FriendsAddViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 10
     }
-    
-   
 }
 
 
@@ -382,7 +371,6 @@ struct profileVIewDataProvider {
         data.append(("Location", Profile().Location))
         data.append(("Timezone", Profile().Timezone))
         data.append(("Preferrable Contact Time", Profile().PreferrableCountryTime))
-
         return data
     }
 }
@@ -440,6 +428,22 @@ extension FriendsAddViewController: UIImagePickerControllerDelegate {
         picker.dismiss(animated: true, completion: nil)
         guard let imagee = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else{ return }
         imageView.image = imagee
+        
+        createLocalDataFile()
+
+        guard let pngImageData = imageView.image?.pngData() else {
+            print("========================pngImageDatanil")
+            return }
+        print("pngimagedataa ==================== \(pngImageData)")
+        do {
+            try pngImageData.write(to: url)
+            
+        } catch {
+
+            print("error; \(error.localizedDescription)")
+        }
+
+        
    }
 
     // users cancel

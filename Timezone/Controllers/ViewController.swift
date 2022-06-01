@@ -74,7 +74,6 @@ class ViewController: UIViewController {
         
         let countryBTN = UIBarButtonItem(title: "Country", style: .plain, target: self, action: #selector(countryHandler))
         navigationItem.rightBarButtonItem = countryBTN
-        navigationController?.isNavigationBarHidden = false
     }
 
     
