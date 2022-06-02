@@ -76,6 +76,7 @@ class CountriesViewController: UIViewController {
     
     
     func parseJSON(){
+        
          guard let path = Bundle.main.path(forResource: "countriesData", ofType: "json") else {
              print("====================guard let")
              return }
@@ -87,6 +88,7 @@ class CountriesViewController: UIViewController {
              let jsonData = try Data(contentsOf: url)
              print("1")
              countries = try JSONDecoder().decode(CountriesData.self, from:  jsonData)
+             
              print("2")
              if let result = countries {
                  print("reslt: \(result)")
@@ -98,7 +100,11 @@ class CountriesViewController: UIViewController {
              }
              
          }catch{
-             print("Error: \(error.localizedDescription)")
+             
+             print("Error: \(error)")
+             print("debugError: \(debugDescription.codingKey)")
+             let a = DecodingError.Context(codingPath: [debugDescription.codingKey], debugDescription: debugDescription, underlyingError: error)
+             print("==========a\(a)")
          }
      }
     

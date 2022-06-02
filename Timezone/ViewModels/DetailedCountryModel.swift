@@ -7,39 +7,55 @@
 
 import Foundation
 import UIKit
-struct CountriesData:Codable{
-    let data: [Countries]
+struct CountriesData:Decodable{
+    var countriesData: [Countries]
 }
 
-struct Countries: Codable{
-    let name: String
-    let code: String
-    let capital: String
-    let region: String
+//struct Countries: Codable{
+//    var name: String
+//    var code: String
+//    var capital: String
+//    var region: String
 //    var currency: currency
-//    let languages: languages
-//    let flag: String
-}
-
-//struct Regions: Codable{
-//    let name: String
-//    let code: String
+//    var language: language
+//    var flag: String
 //}
-  
+//
+//
+//struct currency: Codable{
+////    let reginons:Regions
+//    var code: String
+//    var name: String
+//    var symbol: String
+//}
+//
+//struct language: Codable{
+////    let regions: Regions
+//    var code: String
+//    var name: String
+//
+//}
+
+struct Countries: Codable {
+    var name: String
+    var code: String
+    var capital: String
+    var region: String
+    var currency: currency
+    var language : language
+    var flag: String
+}
 
 struct currency: Codable{
-//    let reginons:Regions
-    let name: String
-    let code: String
-    let symbol: String
+    var code: String
+    var name: String
+    var symbol: String
 }
 
-struct languages: Codable{
-//    let regions: Regions
-    let name: String
-    let code: String
+struct language: Codable{
+    var code: String
+    var name: String
 }
-
 
 //
 //
