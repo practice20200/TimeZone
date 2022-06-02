@@ -10,8 +10,13 @@ import Elements
 
 class CountriesViewController: UIViewController {
 
-    var data = countryDataProvider.dataProvider()
+//    var data = countryDataProvider.dataProvider()
     var countryName = "Country"
+    var data = [CountriesData]()
+    var countries: CountriesData?
+    var passedIndexPath: IndexPath?
+    var passedSection = 0
+    var trueFalseChecker = false
     
     private var country : BaseUILabel = {
         let label = BaseUILabel()
@@ -40,7 +45,7 @@ class CountriesViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         view.addSubview(contentStack)
-
+//        parseJSON()
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -60,12 +65,45 @@ class CountriesViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        parseJSON()
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         tableView.frame = view.bounds
     }
+    
+    
+    
+    func parseJSON(){
+         guard let path = Bundle.main.path(forResource: "countriesData", ofType: "json") else {
+             print("====================guard let")
+             return }
+                 print("Path: =====================\(path)")
+         let url = URL(fileURLWithPath: path)
+        print("URL: =====================\(url)")
+         
+         do {
+             let jsonData = try Data(contentsOf: url)
+             print("1")
+             countries = try JSONDecoder().decode(CountriesData.self, from:  jsonData)
+             print("2")
+             if let result = countries {
+                 print("reslt: \(result)")
+                 data.append(result)
+//                 isCheckedData.append(isChekedResult(result: result, isChecked: false))
+                 print("Succeeded in parsing")
+             }else {
+                 print("Failed to parse")
+             }
+             
+         }catch{
+             print("Error: \(error.localizedDescription)")
+         }
+     }
+    
+    
+    
      
     @objc func friendHandler(){
         let vc = FriendViewController()
@@ -78,11 +116,9 @@ class CountriesViewController: UIViewController {
 extension CountriesViewController : UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        
-        
         let vc = CategolizedFriendGroupViewController()
-        vc.selectedCountry = data[indexPath.row].country
-        countryName = data[indexPath.row].country
+//        vc.selectedCountry = data[indexPath.row].country
+//        countryName = data[indexPath.row].data[indexPath.row].name
         
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -97,8 +133,8 @@ extension CountriesViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath : IndexPath) -> UITableViewCell {
        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CountryTableViewCell
-        let item = data[indexPath.row]
-        cell.countryLabel.text = item.country
+//        let item = data2[indexPath.row].data[indexPath.row]
+//        cell.countryLabel.text = item.name
        return cell
     }
     
@@ -133,3 +169,37 @@ struct countryDataProvider {
         return data
     }
 }
+
+//
+//struct countryDataProvider {
+//    static func dataProvider() -> (String,[Country]) {
+//        var Adata = (String, [Country])
+//        var Bdata = (String, [Country])
+//        var Cdata = (String, [Country])
+//        var Ddata = (String, [Country])
+//        var Edata = (String, [Country])
+//        var Fdata = (String, [Country])
+//        var Gdata = (String, [Country])
+//        var Hdata = (String, [Country])
+//        data.append(Country(country: "Japan"))
+//        data.append(Country(country: "Japan"))
+//        data.append(Country(country: "Japan"))
+//        data.append(Country(country: "Japan"))
+//        data.append(Country(country: "Japan"))
+//        data.append(Country(country: "Japan"))
+//        data.append(Country(country: "Japan"))
+//        data.append(Country(country: "Japan"))
+//        data.append(Country(country: "Japan"))
+//        data.append(Country(country: "Japan"))
+//        data.append(Country(country: "Japan"))
+//        data.append(Country(country: "Japan"))
+//        data.append(Country(country: "Japan"))
+//        data.append(Country(country: "Japan"))
+//        data.append(Country(country: "Japan"))
+//        data.append(Country(country: "Japan"))
+//        data.append(Country(country: "Canda"))
+//        data.append(Country(country: "Japan"))
+//        data.append(Country(country: "Japan"))
+//        data.append(Country(country: "Japan"))
+//        return data
+//    }

@@ -13,6 +13,9 @@
 		B380EBBD283C259E00FD6BD1 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = B380EBBC283C259E00FD6BD1 /* Country.swift */; };
 		B380EBBF283C295800FD6BD1 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B380EBBE283C295800FD6BD1 /* Profile.swift */; };
 		B380EBC1283C2A1000FD6BD1 /* IndividualTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B380EBC0283C2A1000FD6BD1 /* IndividualTableViewCell.swift */; };
+		B3C2850A28481F1500F3D223 /* DetailedCountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C2850928481F1500F3D223 /* DetailedCountryModel.swift */; };
+		B3C2850C28481F6600F3D223 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = B3C2850B28481F6600F3D223 /* countries.json */; };
+		B3C2850E2848505400F3D223 /* countriesData.json in Resources */ = {isa = PBXBuildFile; fileRef = B3C2850D2848505400F3D223 /* countriesData.json */; };
 		B3C2D47228403BEC007F8113 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = B3C2D47128403BEC007F8113 /* data.json */; };
 		B3C321D92840C6A9006221B8 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C321D82840C6A9006221B8 /* Result.swift */; };
 		B3C321DB2840C6CB006221B8 /* ResultItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C321DA2840C6CB006221B8 /* ResultItem.swift */; };
@@ -47,6 +50,9 @@
 		B380EBBC283C259E00FD6BD1 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		B380EBBE283C295800FD6BD1 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		B380EBC0283C2A1000FD6BD1 /* IndividualTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualTableViewCell.swift; sourceTree = "<group>"; };
+		B3C2850928481F1500F3D223 /* DetailedCountryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedCountryModel.swift; sourceTree = "<group>"; };
+		B3C2850B28481F6600F3D223 /* countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries.json; sourceTree = SOURCE_ROOT; };
+		B3C2850D2848505400F3D223 /* countriesData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countriesData.json; sourceTree = SOURCE_ROOT; };
 		B3C2D47128403BEC007F8113 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = SOURCE_ROOT; };
 		B3C321D82840C6A9006221B8 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		B3C321DA2840C6CB006221B8 /* ResultItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultItem.swift; sourceTree = "<group>"; };
@@ -125,6 +131,8 @@
 		B3CF8D8E28389911006678AC /* Timezone */ = {
 			isa = PBXGroup;
 			children = (
+				B3C2850D2848505400F3D223 /* countriesData.json */,
+				B3C2850B28481F6600F3D223 /* countries.json */,
 				B3C2D47128403BEC007F8113 /* data.json */,
 				B3CF8DAA28389FE1006678AC /* Resources */,
 				B3CF8DA928389FD7006678AC /* Utils */,
@@ -169,6 +177,7 @@
 				B380EBBE283C295800FD6BD1 /* Profile.swift */,
 				B3C321D82840C6A9006221B8 /* Result.swift */,
 				B3C321DA2840C6CB006221B8 /* ResultItem.swift */,
+				B3C2850928481F1500F3D223 /* DetailedCountryModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -264,6 +273,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3CF8D9C28389915006678AC /* LaunchScreen.storyboard in Resources */,
+				B3C2850C28481F6600F3D223 /* countries.json in Resources */,
+				B3C2850E2848505400F3D223 /* countriesData.json in Resources */,
 				B3CF8D9928389915006678AC /* Assets.xcassets in Resources */,
 				B3CF8D9728389911006678AC /* Main.storyboard in Resources */,
 				B3C2D47228403BEC007F8113 /* data.json in Resources */,
@@ -288,6 +299,7 @@
 				B3CF8DAC2838A047006678AC /* ViewTableCell.swift in Sources */,
 				B3CF8DB42838AE49006678AC /* FriendViewController.swift in Sources */,
 				B3CF8DB82838B0AC006678AC /* FriendsListCell.swift in Sources */,
+				B3C2850A28481F1500F3D223 /* DetailedCountryModel.swift in Sources */,
 				B3C321DB2840C6CB006221B8 /* ResultItem.swift in Sources */,
 				B3CF8D9028389911006678AC /* AppDelegate.swift in Sources */,
 				B380EBBF283C295800FD6BD1 /* Profile.swift in Sources */,

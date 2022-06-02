@@ -188,8 +188,5 @@ extension FriendViewController: UIImagePickerControllerDelegate {
         guard let imagee = info[UIImagePickerController.InfoKey(rawValue: profileImage) ] as? UIImage else{
             print("imagepIcker nil")
             return }
-        
     }
-    
- 
 }

@@ -1,0 +1,12 @@
+
+{
+    "countries": [
+        {
+            "name": "Afghanistan",
+            "code": "AF",
+            "capital": "Kabul",
+            "region": "AS",
+        }
+     
+        ];
+}

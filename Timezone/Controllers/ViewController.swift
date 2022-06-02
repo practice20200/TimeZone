@@ -106,7 +106,9 @@ class ViewController: UIViewController {
    func parseJSON(){
         guard let path = Bundle.main.path(forResource: "data", ofType: "json") else { return }
                 
-        let url = URL(fileURLWithPath: path)
+       print("Path: =====================\(path)")
+let url = URL(fileURLWithPath: path)
+print("URL: =====================\(url)")
         
         
         do {
